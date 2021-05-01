@@ -1,0 +1,8 @@
+include ':binding-jdbc'
+include ':binding-latest-sqlite'
+include ':common-dml'
+include ':binding-system-sqlite'
+include ':common-query-builder'
+include ':common-ddl'
+include ':sample'
+rootProject.name = "OutOfROOM"
