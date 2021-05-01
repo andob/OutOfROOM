@@ -24,4 +24,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    api project(":common-ddl")
+    api project(":common-dml")
+    api project(":common-query-builder")
 }
