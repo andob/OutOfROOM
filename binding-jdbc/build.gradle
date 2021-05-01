@@ -10,9 +10,9 @@ java {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    api project(":common-ddl")
-    api project(":common-dml")
-    api project(":common-query-builder")
+    implementation project(":common-ddl")
+    implementation project(":common-dml")
+    implementation project(":common-query-builder")
 }
 
 publishing {

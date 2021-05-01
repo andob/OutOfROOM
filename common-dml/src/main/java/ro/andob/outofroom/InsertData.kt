@@ -1,10 +1,8 @@
 package ro.andob.outofroom
 
-import android.database.sqlite.SQLiteStatement
-
-class SQLiteInsertData
+class InsertData
 (
-    private val statement : SQLiteStatement,
+    private val statement : IStatement,
     private val columns : List<Column>,
 )
 {

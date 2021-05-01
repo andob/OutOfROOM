@@ -1,6 +1,7 @@
 package ro.andob.outofroom
 
-//todo LOWEST add unit tests
+//todo add unit tests on everything
+//todo check on projects - what else needs to be done?
 abstract class Table
 (
     val name : String
@@ -33,9 +34,9 @@ abstract class Table
                     transform = { column -> "`${column.name}`" }))
         }
 
-        //todo MED create table foreign key
-        //todo MED create index
-        //todo MED create unique index
+        //todo create table foreign key
+        //todo create index
+        //todo create unique index
         return "create table if not exists `$name` (${definitions.joinToString(separator = ", ")})"
     }
 }

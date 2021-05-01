@@ -2,10 +2,18 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+idea {
+    module {
+        sourceDirs += file('build/generated/source/kapt/test')
+        generatedSourceDirs += file('build/generated/source/kapt/test')
+    }
 }
 
 dependencies {

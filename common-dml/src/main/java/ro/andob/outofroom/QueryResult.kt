@@ -1,10 +1,8 @@
 package ro.andob.outofroom
 
-import android.database.Cursor
-
-class SQLiteQueryResult
+class QueryResult
 (
-    private val cursor : Cursor
+    private val cursor : ICursor
 )
 {
     fun getString(column : Column) : String =
@@ -36,7 +34,7 @@ class SQLiteQueryResult
 
     override fun toString() : String
     {
-        return try { cursor.getString(1) }
+        return try { cursor.getString(1)?:"" }
         catch (ex : Throwable) { "" }
     }
 }

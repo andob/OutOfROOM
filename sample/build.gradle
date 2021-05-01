@@ -32,6 +32,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
 
+    implementation 'com.github.requery:sqlite-android:3.35.5'
+
+    implementation project(":common-ddl")
+    implementation project(":common-dml")
+    implementation project(":common-query-builder")
     implementation project(":binding-system-sqlite")
     implementation project(":binding-latest-sqlite")
     implementation project(":binding-jdbc")
