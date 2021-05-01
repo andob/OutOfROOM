@@ -2,8 +2,8 @@ package ro.andob.outofroom
 
 enum class InsertOr
 {
-    //todo sa fac sa mearga throw exception
-    //todo care e diferenta dintre toate?
+    //todo MED sa fac sa mearga throw exception
+    //todo MED care e diferenta dintre toate?
     ThrowException, Replace, Abort, Fail, Ignore, Rollback;
 
     override fun toString() : String = when(this)

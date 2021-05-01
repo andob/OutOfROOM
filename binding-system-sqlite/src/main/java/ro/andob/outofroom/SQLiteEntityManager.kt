@@ -2,15 +2,15 @@ package ro.andob.outofroom
 
 import android.database.sqlite.SQLiteDatabase
 
-//todo compatibilitate jdbc
-//todo compatibilitate requery sqlite
-//todo query builder?
+//todo LOW compatibilitate jdbc
+//todo LOW compatibilitate requery sqlite
+//todo HIGH sample the query builder
 class SQLiteEntityManager
 (
     val database : SQLiteDatabase
 )
 {
-    //todo sample this
+    //todo HIGH sample this
     inline fun <MODEL> query
     (
         sql : String,
@@ -33,7 +33,7 @@ class SQLiteEntityManager
         return items
     }
 
-    //todo sample this
+    //todo HIGH sample this
     fun exec
     (
         sql : String,
@@ -44,7 +44,7 @@ class SQLiteEntityManager
         database.execSQL(sql, argumentsStringArray)
     }
 
-    //todo sample this
+    //todo HIGH sample this
     inline fun insert
     (
         or : InsertOr,

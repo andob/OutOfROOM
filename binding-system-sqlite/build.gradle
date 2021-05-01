@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
     compileSdkVersion 30
@@ -28,4 +29,25 @@ dependencies {
     api project(":common-ddl")
     api project(":common-dml")
     api project(":common-query-builder")
+}
+
+publishing {
+    publications {
+        repositories.maven {
+            url 'https://maven.andob.info/repository/open_source/'
+            credentials {
+                username "$System.env.MAVEN_PUBLISH_USERNAME"
+                password "$System.env.MAVEN_PUBLISH_PASSWORD"
+            }
+        }
+
+        android.libraryVariants.all { variant ->
+            "maven${variant.name.capitalize()}Aar"(MavenPublication) {
+                from components.findByName("android${variant.name.capitalize()}")
+                groupId 'ro.andob.outofroom'
+                artifactId 'outofroom'
+                version '1.0.0'
+            }
+        }
+    }
 }

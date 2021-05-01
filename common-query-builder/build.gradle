@@ -1,5 +1,7 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -8,4 +10,29 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'javax.persistence:javax.persistence-api:2.2'
+    testImplementation 'ro.andob.fieldschema:annotations:0.3.4'
+    kaptTest 'ro.andob.fieldschema:fs-processor:0.3.4'
+    kaptTest 'ro.andob.fieldschema:ts-processor-jpa:0.3.4'
+}
+
+publishing {
+    publications {
+        repositories.maven {
+            url 'https://maven.andob.info/repository/open_source/'
+            credentials {
+                username "$System.env.MAVEN_PUBLISH_USERNAME"
+                password "$System.env.MAVEN_PUBLISH_PASSWORD"
+            }
+        }
+
+        maven(MavenPublication) {
+            groupId 'ro.andob.outofroom'
+            artifactId 'common-query-builder'
+            version '1.0.0'
+            from components.java
+        }
+    }
 }
