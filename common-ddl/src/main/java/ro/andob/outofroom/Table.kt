@@ -1,7 +1,5 @@
 package ro.andob.outofroom
 
-//todo add unit tests on everything
-//todo check on projects - what else needs to be done?
 abstract class Table
 (
     val name : String

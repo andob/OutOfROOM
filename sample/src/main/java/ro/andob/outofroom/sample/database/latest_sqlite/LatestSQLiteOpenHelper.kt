@@ -12,7 +12,8 @@ object LatestSQLiteOpenHelper : SQLiteOpenHelper
     /*context*/ App.context,
     /*name*/ "notes_latestsqlite.db",
     /*factory*/ null,
-    /*version*/ 1
+    /*version*/ 1,
+    /*onCorruption*/ { throw Error("DETECTED A CORRUPT DATABASE FILE") }
 )
 {
     override fun onCreate(db : SQLiteDatabase)
@@ -36,4 +37,8 @@ object LatestSQLiteOpenHelper : SQLiteOpenHelper
         //for the sake of simplicity, we won't implement migrations
         //you can use a migration library such as Flyway
     }
+
+    //note to self: to close and delete thread safely, use it like this:
+    //fun closeAnd(more : () -> (Unit)) = synchronized(this) { super.close(); more() }
+    //openHelper.closeAnd { databaseFile.delete() }
 }
