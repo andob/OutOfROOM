@@ -17,6 +17,9 @@ object SystemSQLiteOpenHelper : SQLiteOpenHelper
     {
         for (table in SampleDatabaseSchema.tables)
             db.execSQL(table.toCreateTableSQL())
+
+        for (index in SampleDatabaseSchema.indices)
+            db.execSQL(index.toCreateIndexSQL())
     }
 
     override fun onConfigure(db : SQLiteDatabase)

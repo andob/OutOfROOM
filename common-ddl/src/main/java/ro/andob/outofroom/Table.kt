@@ -17,7 +17,8 @@ abstract class Table
             .map { field -> field.get(this) as Column }
     }
 
-    open val primaryKey : PrimaryKey? get() = null
+    abstract val primaryKey : PrimaryKey?
+    abstract val foreignKeys : List<ForeignKey>
 
     override fun toString() = name
 
@@ -25,18 +26,27 @@ abstract class Table
     {
         val definitions=mutableListOf<String>()
         definitions.addAll(columns.map { column ->
-            "`${column.name}` ${column.type} ${if (column.notNull) "not null" else ""}"
+
+            val tokens=mutableListOf<String>()
+            tokens.add("`${column.name}`")
+            tokens.add("${column.type}")
+            if (column.notNull)
+                tokens.add("not null")
+
+            (primaryKey as? PrimaryKey.AutoIncrement)?.let { autoIncrementPrimaryKey ->
+                if (autoIncrementPrimaryKey.column==column)
+                    tokens.add("primary key autoincrement")
+            }
+
+            return@map tokens.joinToString(separator = " ")
         })
 
-        primaryKey?.let { primaryKey ->
-            val primaryKeyColumns=primaryKey.columns.joinToString(
-                separator = ", ", transform = { column -> "`${column.name}`" })
-            definitions.add("primary key ($primaryKeyColumns)")
-        }
+        if (primaryKey!=null&&primaryKey !is PrimaryKey.AutoIncrement)
+            definitions.add(primaryKey.toString())
 
-        //todo create table foreign key
-        //todo create index
-        //todo create unique index
+        for (foreignKey in foreignKeys)
+            definitions.add(foreignKey.toString())
+
         return "create table if not exists `$name` (${definitions.joinToString(separator = ", ")})"
     }
 }

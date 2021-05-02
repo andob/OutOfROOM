@@ -4,6 +4,8 @@ abstract class Schema
 {
     val tables by lazy { findTablesReflectively() }
 
+    abstract val indices : List<Index>
+
     private fun findTablesReflectively() : List<Table>
     {
         return this::class.java.declaredFields

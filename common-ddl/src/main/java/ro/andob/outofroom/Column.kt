@@ -1,6 +1,6 @@
 package ro.andob.outofroom
 
-class Column
+data class Column
 (
     val name : String,
     val type : SQLType,

@@ -2,7 +2,6 @@ package ro.andob.outofroom
 
 enum class InsertOr
 {
-    //todo care e diferenta dintre toate?
     Replace, Abort, Fail, Ignore, Rollback;
 
     override fun toString() : String = when(this)

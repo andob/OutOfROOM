@@ -1,7 +1,11 @@
 package ro.andob.outofroom
 
-class PrimaryKey
+open class PrimaryKey
 (
-    column : Column,
-    val columns : List<Column> = listOf(column)
+    private vararg val columns : Column
 )
+{
+    class AutoIncrement(val column : Column) : PrimaryKey(column)
+
+    override fun toString() = "primary key (${columns.joinToString(separator = ",") { column -> "`${column.name}`" }})"
+}
