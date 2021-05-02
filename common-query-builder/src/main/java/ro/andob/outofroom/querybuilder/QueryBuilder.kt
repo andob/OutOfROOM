@@ -1,13 +1,15 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.Table
+
 abstract class QueryBuilder
 <FILTER : IQueryBuilderFilter>
 (val filter : FILTER)
 {
-    open fun buildSqlString() : String
+    fun build() : String
     {
         var sql="select ${projection(QueryProjectionClauses())}"
-        sql+=" from ${tableName()} "
+        sql+=" from ${table()} "
 
         join(QueryJoinClauses())?.let { join ->
             if (join.isNotEmpty())
@@ -33,9 +35,7 @@ abstract class QueryBuilder
         return sql
     }
 
-    open fun build() = buildSqlString()
-
-    abstract fun tableName() : String?
+    abstract fun table() : Table?
     open fun projection(clauses : QueryProjectionClauses) : String = "*"
     open fun join(clauses : QueryJoinClauses) : String? = null
     abstract fun where(conditions : QueryWhereConditions) : String?

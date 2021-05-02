@@ -13,7 +13,7 @@ class SystemSQLiteDBStatementWrapper
 
     override fun bindNull(index : Int) = delegate.bindNull(index)
 
-    override fun executeInsert() : Long = delegate.executeInsert()
+    override fun executeInsert() { delegate.executeInsert() }
 
     override fun close() = delegate.close()
 }

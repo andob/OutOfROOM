@@ -11,8 +11,4 @@ abstract class Schema
             .map { field -> field.also { it.isAccessible=true } }
             .map { field -> field.get(this) as Table }
     }
-
-    fun toCreateTablesSQL() : String =
-        findTablesReflectively().joinToString(separator = "\n",
-            transform = { table -> "${table.toCreateTableSQL()};" })
 }

@@ -29,9 +29,9 @@ abstract class Table
         })
 
         primaryKey?.let { primaryKey ->
-            definitions.add("primary key "+
-                primaryKey.columns.joinToString(separator = ", ",
-                    transform = { column -> "`${column.name}`" }))
+            val primaryKeyColumns=primaryKey.columns.joinToString(
+                separator = ", ", transform = { column -> "`${column.name}`" })
+            definitions.add("primary key ($primaryKeyColumns)")
         }
 
         //todo create table foreign key

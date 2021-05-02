@@ -31,7 +31,7 @@ class QueryWhereConditionsTests
         val restaurantId=5
         val restaurantRating=5
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name))
+        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column))
         conditions.add("${FS.Restaurant_id} = $restaurantId")
         conditions.add("${FS.Restaurant_rating} = $restaurantRating")
 
@@ -53,7 +53,7 @@ class QueryWhereConditionsTests
         val restaurantId=5
         val restaurantRating=5
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name, FS.RestaurantJoin_cityName))
+        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column, FS.RestaurantJoin_cityName.column))
         conditions.add("${FS.Restaurant_id} = $restaurantId")
         conditions.add("${FS.Restaurant_rating} = $restaurantRating")
 
@@ -75,7 +75,7 @@ class QueryWhereConditionsTests
 
         val search="string to search"
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name, FS.RestaurantJoin_cityName))
+        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column, FS.RestaurantJoin_cityName.column))
 
         val firstRestaurantId=5
         val firstRestaurantRating=5

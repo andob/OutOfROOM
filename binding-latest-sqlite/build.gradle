@@ -26,8 +26,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    api 'com.github.requery:sqlite-android:3.35.5'
-    api 'androidx.sqlite:sqlite-ktx:2.1.0'
+    implementation 'com.github.requery:sqlite-android:3.35.5'
+    implementation 'androidx.sqlite:sqlite-ktx:2.1.0'
 
     implementation project(":common-ddl")
     implementation project(":common-dml")

@@ -1,16 +1,18 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.Column
+import ro.andob.outofroom.Table
 import java.util.*
 
 class QueryProjectionClauses : LinkedList<String>()
 {
-    fun addAllFieldsFromTable(tableName : String) : QueryProjectionClauses
+    fun addAllFieldsFromTable(table : Table) : QueryProjectionClauses
     {
-        add("$tableName.*")
+        add("$table.*")
         return this
     }
 
-    fun addField(fieldName : String, fromTable : String, projectAs : String) : QueryProjectionClauses
+    fun addField(fieldName : Column, fromTable : Table, projectAs : String) : QueryProjectionClauses
     {
         add("$fromTable.$fieldName as $projectAs")
         return this
@@ -31,11 +33,11 @@ class QueryProjectionClauses : LinkedList<String>()
 
 class ProjectionClauseBuilder
 {
-    internal lateinit var fieldName : String
-    fun fieldName(fieldName : String) = also { this.fieldName=fieldName }
+    internal lateinit var fieldName : Column
+    fun fieldName(fieldName : Column) = also { this.fieldName=fieldName }
 
-    internal lateinit var fromTable : String
-    fun fromTable(fromTable : String) = also { this.fromTable=fromTable }
+    internal lateinit var fromTable : Table
+    fun fromTable(fromTable : Table) = also { this.fromTable=fromTable }
 
     internal lateinit var projectAs : String
     fun projectAs(projectAs : String) = also { this.projectAs=projectAs }

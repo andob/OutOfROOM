@@ -1,10 +1,11 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.Column
 import java.util.*
 
 class QueryWhereConditions : LinkedList<String>()
 {
-    fun addSearchConditions(search : String?, onColumns : Array<String>)
+    fun addSearchConditions(search : String?, onColumns : Array<Column>)
     {
         if (search!=null&&search.isNotEmpty())
         {

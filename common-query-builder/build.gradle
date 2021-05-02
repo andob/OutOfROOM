@@ -19,6 +19,8 @@ idea {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    implementation project(":common-ddl")
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'javax.persistence:javax.persistence-api:2.2'
     testImplementation 'ro.andob.fieldschema:annotations:0.3.4'

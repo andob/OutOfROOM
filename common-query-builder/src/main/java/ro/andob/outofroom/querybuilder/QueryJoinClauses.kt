@@ -1,16 +1,18 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.Column
+import ro.andob.outofroom.Table
 import java.util.*
 
 class QueryJoinClauses : LinkedList<String>()
 {
-    fun addInnerJoin      (remoteTable : String, remoteColumn : String, table : String, column : String) = join("inner",       remoteTable, remoteColumn, table, column)
-    fun addCrossJoin      (remoteTable : String, remoteColumn : String, table : String, column : String) = join("cross",       remoteTable, remoteColumn, table, column)
-    fun addLeftOuterJoin  (remoteTable : String, remoteColumn : String, table : String, column : String) = join("left outer",  remoteTable, remoteColumn, table, column)
-    fun addRightOuterJoin (remoteTable : String, remoteColumn : String, table : String, column : String) = join("right outer", remoteTable, remoteColumn, table, column)
-    fun addFullOuterJoin  (remoteTable : String, remoteColumn : String, table : String, column : String) = join("full outer",  remoteTable, remoteColumn, table, column)
+    fun addInnerJoin      (remoteTable : Table, remoteColumn : Column, table : Table, column : Column) = join("inner",       remoteTable, remoteColumn, table, column)
+    fun addCrossJoin      (remoteTable : Table, remoteColumn : Column, table : Table, column : Column) = join("cross",       remoteTable, remoteColumn, table, column)
+    fun addLeftOuterJoin  (remoteTable : Table, remoteColumn : Column, table : Table, column : Column) = join("left outer",  remoteTable, remoteColumn, table, column)
+    fun addRightOuterJoin (remoteTable : Table, remoteColumn : Column, table : Table, column : Column) = join("right outer", remoteTable, remoteColumn, table, column)
+    fun addFullOuterJoin  (remoteTable : Table, remoteColumn : Column, table : Table, column : Column) = join("full outer",  remoteTable, remoteColumn, table, column)
 
-    private fun join(type : String, remoteTable : String, remoteColumn : String, table : String, column : String)
+    private fun join(type : String, remoteTable : Table, remoteColumn : Column, table : Table, column : Column)
     {
         add(" $type join $remoteTable on $table.$column = $remoteTable.$remoteColumn")
     }
@@ -37,15 +39,15 @@ class QueryJoinClauses : LinkedList<String>()
 
 class JoinClauseBuilder
 {
-    internal lateinit var remoteTable : String
-    fun remoteTable(remoteTable : String) = also { this.remoteTable=remoteTable }
+    internal lateinit var remoteTable : Table
+    fun remoteTable(remoteTable : Table) = also { this.remoteTable=remoteTable }
 
-    internal lateinit var remoteColumn : String
-    fun remoteColumn(remoteColumn : String) = also { this.remoteColumn=remoteColumn }
+    internal lateinit var remoteColumn : Column
+    fun remoteColumn(remoteColumn : Column) = also { this.remoteColumn=remoteColumn }
 
-    internal lateinit var table : String
-    fun table(table : String) = also { this.table=table }
+    internal lateinit var table : Table
+    fun table(table : Table) = also { this.table=table }
 
-    internal lateinit var column : String
-    fun column(column : String) = also { this.column=column }
+    internal lateinit var column : Column
+    fun column(column : Column) = also { this.column=column }
 }

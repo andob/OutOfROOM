@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="choose_db_api">Choose DB API:</string>
+    <string name="system_sqlite">System SQLite</string>
+    <string name="latest_sqlite">Latest SQLite</string>
+    <string name="notes">Notes</string>
+    <string name="search">Search</string>
+    <string name="add_note">Add note</string>
+    <string name="message">Message</string>
+    <string name="note">Note</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="edit_note">Edit note</string>
+    <string name="delete_this_note_question">Do you really want to delete this note?</string>
+</resources>

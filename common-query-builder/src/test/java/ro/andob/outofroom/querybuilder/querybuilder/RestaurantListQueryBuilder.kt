@@ -3,18 +3,20 @@ package ro.andob.outofroom.querybuilder.querybuilder
 import com.yatatsu.fieldschema.FS
 import ro.andob.outofroom.querybuilder.QueryBuilder
 import ro.andob.outofroom.querybuilder.QueryWhereConditions
+import ro.andob.outofroom.querybuilder.column
 import ro.andob.outofroom.querybuilder.model.RestaurantFilter
+import ro.andob.outofroom.querybuilder.table
 
 class RestaurantListQueryBuilder : QueryBuilder<RestaurantFilter>
 {
     constructor(filter: RestaurantFilter) : super(filter)
 
-    override fun tableName() = FS.Restaurant
+    override fun table() = FS.Restaurant.table
 
-    override fun where(conditions : QueryWhereConditions) : String?
+    override fun where(conditions : QueryWhereConditions) : String
     {
         if (filter.search!=null)
-            conditions.addSearchConditions(filter.search, onColumns = arrayOf(FS.Restaurant_name))
+            conditions.addSearchConditions(filter.search, onColumns = arrayOf(FS.Restaurant_name.column))
 
         if (filter.rating!=null)
             conditions.add("${FS.Restaurant_rating} = ${filter.rating}")

@@ -4,14 +4,15 @@ import io.requery.android.database.sqlite.SQLiteDatabase
 
 class LatestSQLiteDBWrapper
 (
-    private val database : SQLiteDatabase
+    private val databaseProvider : () -> SQLiteDatabase
 ) : IDatabase
 {
     override fun rawQuery(sql : String, args : Array<String>) : ICursor =
-        LatestSQLiteDBCursorWrapper(database.rawQuery(sql, args))
+        LatestSQLiteDBCursorWrapper(databaseProvider().rawQuery(sql, args))
 
-    override fun execSQL(sql : String, args : Array<String>) = database.execSQL(sql, args)
+    override fun execSQL(sql : String, args : Array<String>) =
+        databaseProvider().execSQL(sql, args)
 
     override fun compileStatement(sql : String) : IStatement =
-        LatestSQLiteDBStatementWrapper(database.compileStatement(sql))
+        LatestSQLiteDBStatementWrapper(databaseProvider().compileStatement(sql))
 }

@@ -14,12 +14,11 @@ class JDBCStatementWrapper
 
     override fun bindNull(index : Int) = statement.setNull(index, Types.NULL)
 
-    //todo a se interpreta rezultatul - pt insert or throw
-    override fun executeInsert() : Long = statement.executeUpdate().toLong()
+    override fun executeInsert() { statement.executeUpdate() }
 
     internal fun executeQuery() : ICursor = JDBCResultSetWrapper(statement.executeQuery())
 
-    internal fun execute() : Boolean = statement.execute()
+    internal fun execute() { statement.execute() }
 
     override fun close() = statement.close()
 }

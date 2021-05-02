@@ -9,6 +9,5 @@ interface IStatement : Closeable
     fun bindDouble(index : Int, value : Double)
     fun bindNull(index : Int)
 
-    //todo a se interpreta rezultatul - pt insert or throw
-    fun executeInsert() : Long
+    fun executeInsert()
 }

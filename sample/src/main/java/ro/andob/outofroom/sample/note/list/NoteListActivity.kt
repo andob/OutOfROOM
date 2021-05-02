@@ -1,0 +1,72 @@
+package ro.andob.outofroom.sample.note.list
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.android.ext.android.inject
+import ro.andob.outofroom.sample.R
+import ro.andob.outofroom.sample.database.SampleDatabase
+import ro.andob.outofroom.sample.databinding.ActivityNoteListBinding
+import ro.andob.outofroom.sample.model.Note
+import ro.andob.outofroom.sample.model.NoteFilter
+import ro.andob.outofroom.sample.model.StringId
+import ro.andob.outofroom.sample.router.ShowDialog
+import ro.andob.outofroom.sample.view.setOnTextChangedListener
+import ro.andreidobrescu.declarativeadapterkt.SimpleDeclarativeAdapter
+import ro.andreidobrescu.viewbinding_compat.AutoViewBinding
+import ro.andreidobrescu.viewbinding_compat.ReflectiveViewBindingFieldSetter
+
+class NoteListActivity : AppCompatActivity()
+{
+    @AutoViewBinding
+    lateinit var binding : ActivityNoteListBinding
+
+    private val database : SampleDatabase by inject()
+
+    override fun onCreate(savedInstanceState : Bundle?)
+    {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_note_list)
+        ReflectiveViewBindingFieldSetter.setup(this)
+
+        val adapter=SimpleDeclarativeAdapter { NoteCellView(it) }
+        binding.recycleView.layoutManager=LinearLayoutManager(this)
+        binding.recycleView.adapter=adapter
+
+        //for the sake of simplicity, we will query the database on the UI thread
+        adapter.setItems(database.noteDao().getAll(NoteFilter()))
+
+        binding.searchEditText.setOnTextChangedListener { search ->
+            adapter.setItems(database.noteDao().getAll(NoteFilter(search)))
+        }
+
+        binding.addFloatingActionButton.setOnClickListener {
+            showInputNoteForAddDialog { note ->
+                database.noteDao().insert(note)
+                adapter.setItems(database.noteDao().getAll(NoteFilter()))
+            }
+        }
+    }
+
+    private fun showInputNoteForAddDialog(onNoteInputted : (Note) -> Unit)
+    {
+        ShowDialog.withInput(context = this,
+            title = getString(R.string.add_note),
+            hint = getString(R.string.message),
+            okButtonClickedListener = { noteText ->
+                onNoteInputted(Note(
+                    id = StringId.newRandomUUID(),
+                    title = StringId.newRandomUUID<Any>().toString(),
+                    message = noteText,
+                ))
+            })
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+
+        //for the sake of simplicity, this will be called when the user returns from NoteDetailsActivity to NoteListActivity
+        (binding.recycleView.adapter as? SimpleDeclarativeAdapter<*>)?.setItems(database.noteDao().getAll(NoteFilter()))
+    }
+}

@@ -48,7 +48,7 @@ class EntityManager
         val columnNames=columns.joinToString(separator = ",", transform = { column -> "`${column.name}`" })
         val questionMarks=columns.joinToString(separator = ",", transform = { "?" })
 
-        database.compileStatement("insert or $or $table($columnNames) values ($questionMarks)").use { statement ->
+        database.compileStatement("insert or $or into $table($columnNames) values ($questionMarks)").use { statement ->
             adapter(InsertData(statement, columns))
             statement.executeInsert()
         }
