@@ -7,5 +7,5 @@ class ForeignKey
     private val destinationColumn : Column,
 )
 {
-    override fun toString() = "foreign key ($sourceColumn) references $destinationTable($destinationColumn)"
+    override fun toString() = "foreign key (`$sourceColumn`) references `$destinationTable`(`$destinationColumn`)"
 }

@@ -5,6 +5,7 @@ class EntityManager
     val database : IDatabase
 )
 {
+    //todo test this
     inline fun <MODEL> query
     (
         sql : String,
@@ -27,6 +28,7 @@ class EntityManager
         return items
     }
 
+    //todo test this
     fun exec
     (
         sql : String,
@@ -37,6 +39,7 @@ class EntityManager
         database.execSQL(sql, argumentsStringArray)
     }
 
+    //todo test this
     inline fun insert
     (
         or : InsertOr,

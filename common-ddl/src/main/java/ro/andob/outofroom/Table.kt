@@ -22,6 +22,9 @@ abstract class Table
 
     fun toCreateTableSQL() : String
     {
+        if (columns.isEmpty())
+            throw RuntimeException("Please define columns for table \"$name\"!")
+
         val definitions=mutableListOf<String>()
         definitions.addAll(columns.map { column ->
 

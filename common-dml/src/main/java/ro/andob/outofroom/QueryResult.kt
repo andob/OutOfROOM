@@ -1,5 +1,6 @@
 package ro.andob.outofroom
 
+//todo mock this
 class QueryResult
 (
     private val cursor : ICursor
