@@ -1,6 +1,5 @@
 package ro.andob.outofroom
 
-//todo mock this
 class InsertData
 (
     private val statement : IStatement,

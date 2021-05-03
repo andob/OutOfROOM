@@ -1,27 +1,19 @@
-package ro.andob.outofroom.sample.database.dao
+package ro.andob.outofroom.dao
 
-import ro.andob.outofroom.EntityManager
-import ro.andob.outofroom.InsertData
-import ro.andob.outofroom.InsertOr
-import ro.andob.outofroom.QueryResult
-import ro.andob.outofroom.sample.database.SampleDatabaseSchema
-import ro.andob.outofroom.sample.database.getStringId
-import ro.andob.outofroom.sample.database.putStringId
-import ro.andob.outofroom.sample.database.query_builder.NoteListQueryBuilder
-import ro.andob.outofroom.sample.model.Note
-import ro.andob.outofroom.sample.model.NoteFilter
-import ro.andob.outofroom.sample.model.StringId
+import ro.andob.outofroom.*
+import ro.andob.outofroom.model.Note
+import ro.andob.outofroom.model.StringId
 
 class NoteDao
 (
     private val entityManager : EntityManager,
-    private val schema : SampleDatabaseSchema,
+    private val schema : TestDatabaseSchema,
 )
 {
-    fun getAll(noteFilter : NoteFilter) : List<Note>
+    fun getAll() : List<Note>
     {
         return entityManager.query(
-            sql = NoteListQueryBuilder(noteFilter, schema).build(),
+            sql = "select * from ${schema.noteTable}",
             adapter = ::queryResultToNote)
     }
 
@@ -51,15 +43,30 @@ class NoteDao
             arguments = arrayOf(note.id))
     }
 
+    fun deleteAll()
+    {
+        entityManager.exec(sql = "delete from ${schema.noteTable}")
+    }
+
     private fun queryResultToNote(queryResult : QueryResult) = Note(
         id = queryResult.getStringId(schema.noteTable.id),
         title = queryResult.getStringOrNull(schema.noteTable.title)?:"",
-        message = queryResult.getStringOrNull(schema.noteTable.message)?:"")
+        message = queryResult.getStringOrNull(schema.noteTable.message)?:"",
+        someInt = queryResult.getInt(schema.noteTable.someInt),
+        someLong = queryResult.getLong(schema.noteTable.someLong),
+        someFloat = queryResult.getFloat(schema.noteTable.someFloat),
+        someDouble = queryResult.getDouble(schema.noteTable.someDouble),
+        someBoolean = queryResult.getBoolean(schema.noteTable.someBoolean))
 
     private fun populateInsertData(insertData : InsertData, note : Note)
     {
         insertData.putStringId(schema.noteTable.id, note.id)
         insertData.putString(schema.noteTable.title, note.title)
         insertData.putString(schema.noteTable.message, note.message)
+        insertData.putInt(schema.noteTable.someInt, note.someInt)
+        insertData.putLong(schema.noteTable.someLong, note.someLong)
+        insertData.putFloat(schema.noteTable.someFloat, note.someFloat)
+        insertData.putDouble(schema.noteTable.someDouble, note.someDouble)
+        insertData.putBoolean(schema.noteTable.someBoolean, note.someBoolean)
     }
 }

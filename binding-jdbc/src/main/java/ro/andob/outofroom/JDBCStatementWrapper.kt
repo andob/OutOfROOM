@@ -14,7 +14,7 @@ class JDBCStatementWrapper
 
     override fun bindNull(index : Int) = statement.setNull(index, Types.NULL)
 
-    override fun executeInsert() { statement.executeUpdate() }
+    override fun executeInsert() { statement.execute() }
 
     internal fun executeQuery() : ICursor = JDBCResultSetWrapper(statement.executeQuery())
 

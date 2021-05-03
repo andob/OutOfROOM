@@ -13,6 +13,8 @@ dependencies {
     implementation project(":common-ddl")
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.xerial:sqlite-jdbc:3.31.1'
+    testImplementation project(":binding-jdbc")
 }
 
 publishing {

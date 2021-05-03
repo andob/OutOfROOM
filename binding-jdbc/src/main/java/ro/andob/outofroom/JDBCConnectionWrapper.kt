@@ -1,6 +1,7 @@
 package ro.andob.outofroom
 
 import java.sql.Connection
+import java.sql.PreparedStatement
 
 class JDBCConnectionWrapper
 (
@@ -9,14 +10,12 @@ class JDBCConnectionWrapper
 {
     override fun rawQuery(sql : String, args : Array<String>) : ICursor
     {
-        JDBCStatementWrapper(connectionProvider().prepareStatement(sql, args)).use { statement ->
-            return statement.executeQuery()
-        }
+        return JDBCStatementWrapper(connectionProvider().prepareStatement(sql).withArgs(args)).executeQuery()
     }
 
     override fun execSQL(sql : String, args : Array<String>)
     {
-        JDBCStatementWrapper(connectionProvider().prepareStatement(sql, args)).use { statement ->
+        JDBCStatementWrapper(connectionProvider().prepareStatement(sql).withArgs(args)).use { statement ->
             statement.execute()
         }
     }
@@ -24,5 +23,10 @@ class JDBCConnectionWrapper
     override fun compileStatement(sql : String) : IStatement
     {
         return JDBCStatementWrapper(connectionProvider().prepareStatement(sql))
+    }
+
+    private fun PreparedStatement.withArgs(args : Array<String>) : PreparedStatement = also { statement ->
+        for ((index, arg) in args.withIndex())
+            statement.setString(index+1, arg)
     }
 }

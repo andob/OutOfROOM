@@ -5,17 +5,17 @@ class EntityManager
     val database : IDatabase
 )
 {
-    //todo test this
     inline fun <MODEL> query
     (
         sql : String,
-        arguments : List<Any?> = listOf(),
+        arguments : Array<Any?> = arrayOf(),
         adapter : (QueryResult) -> (MODEL),
     ) : List<MODEL>
     {
         val items=mutableListOf<MODEL>()
 
-        val argumentsStringArray=arguments.map { it.toString() }.toTypedArray()
+        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(arguments)
+
         database.rawQuery(sql, argumentsStringArray).use { cursor ->
             val queryResult=QueryResult(cursor)
             while (cursor.moveToNext())
@@ -28,18 +28,17 @@ class EntityManager
         return items
     }
 
-    //todo test this
     fun exec
     (
         sql : String,
-        arguments : List<Any?> = listOf(),
+        arguments : Array<Any?> = arrayOf(),
     )
     {
-        val argumentsStringArray=arguments.map { it.toString() }.toTypedArray()
+        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(arguments)
+
         database.execSQL(sql, argumentsStringArray)
     }
 
-    //todo test this
     inline fun insert
     (
         or : InsertOr,

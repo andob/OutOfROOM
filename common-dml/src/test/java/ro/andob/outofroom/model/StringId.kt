@@ -1,4 +1,4 @@
-package ro.andob.outofroom.sample.model
+package ro.andob.outofroom.model
 
 import java.io.Serializable
 import java.util.*

@@ -16,7 +16,7 @@ class JDBCResultSetWrapper
     override fun getDouble(index : Int) : Double = resultSet.getDouble(index)
 
     override fun moveToFirst() : Boolean = resultSet.first()
-    override fun moveToNext(): Boolean = resultSet.next()
+    override fun moveToNext() : Boolean = resultSet.next()
 
     override fun close() = resultSet.close()
 }
