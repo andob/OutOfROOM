@@ -48,8 +48,8 @@ publishing {
             "maven${variant.name.capitalize()}Aar"(MavenPublication) {
                 from components.findByName("android${variant.name.capitalize()}")
                 groupId 'ro.andob.outofroom'
-                artifactId 'outofroom-latest-sqlite'
-                version '1.0.0'
+                artifactId 'binding-latest-sqlite'
+                version '1.0.1'
             }
         }
     }
