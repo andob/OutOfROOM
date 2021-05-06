@@ -21,6 +21,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        buildConfig = false
+    }
 }
 
 dependencies {
@@ -46,7 +49,7 @@ publishing {
                 from components.findByName("android${variant.name.capitalize()}")
                 groupId 'ro.andob.outofroom'
                 artifactId 'binding-system-sqlite'
-                version '1.0.1'
+                version '1.0.2'
             }
         }
     }
