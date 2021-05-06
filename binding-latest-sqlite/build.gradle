@@ -52,7 +52,7 @@ publishing {
                 from components.findByName("android${variant.name.capitalize()}")
                 groupId 'ro.andob.outofroom'
                 artifactId 'binding-latest-sqlite'
-                version '1.0.2'
+                version '1.0.3'
             }
         }
     }

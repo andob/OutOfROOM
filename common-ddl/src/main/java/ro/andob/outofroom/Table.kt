@@ -2,7 +2,7 @@ package ro.andob.outofroom
 
 abstract class Table
 (
-    val name : String
+    private val name : String
 )
 {
     val columns by lazy { findColumnsReflectively() }

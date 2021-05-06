@@ -49,7 +49,7 @@ class CreateStatementsTests
         object : Table(name = "City")
         {
             val id = Column(name = "id", type = SQLType.Integer, notNull = true)
-            val nameColumn = Column(name = "name", type = SQLType.Text)
+            val name = Column(name = "name", type = SQLType.Text)
 
             override val primaryKey : PrimaryKey get() = PrimaryKey.AutoIncrement(id)
             override val foreignKeys : List<ForeignKey> get() = listOf()
@@ -65,7 +65,7 @@ class CreateStatementsTests
         object : Table(name = "City")
         {
             val id = Column(name = "id", type = SQLType.Text, notNull = true)
-            val nameColumn = Column(name = "name", type = SQLType.Text)
+            val name = Column(name = "name", type = SQLType.Text)
 
             override val primaryKey : PrimaryKey get() = PrimaryKey(id)
             override val foreignKeys : List<ForeignKey> get() = listOf()
@@ -81,9 +81,9 @@ class CreateStatementsTests
         object : Table(name = "City")
         {
             val id = Column(name = "id", type = SQLType.Text, notNull = true)
-            val nameColumn = Column(name = "name", type = SQLType.Text, notNull = true)
+            val name = Column(name = "name", type = SQLType.Text, notNull = true)
 
-            override val primaryKey : PrimaryKey get() = PrimaryKey(id, nameColumn)
+            override val primaryKey : PrimaryKey get() = PrimaryKey(id, name)
             override val foreignKeys : List<ForeignKey> get() = listOf()
 
         }.toCreateTableSQL().let { createTable ->
@@ -97,7 +97,7 @@ class CreateStatementsTests
         val countryTable=object : Table(name = "Country")
         {
             val id = Column(name = "id", type = SQLType.Text, notNull = true)
-            val nameColumn = Column(name = "name", type = SQLType.Text)
+            val name = Column(name = "name", type = SQLType.Text)
 
             override val primaryKey : PrimaryKey get() = PrimaryKey(id)
             override val foreignKeys : List<ForeignKey> get() = listOf()
@@ -107,7 +107,7 @@ class CreateStatementsTests
         {
             val id = Column(name = "id", type = SQLType.Text, notNull = true)
             val countryId = Column(name = "countryId", type = SQLType.Text, notNull = true)
-            val nameColumn = Column(name = "name", type = SQLType.Text)
+            val name = Column(name = "name", type = SQLType.Text)
 
             override val primaryKey : PrimaryKey get() = PrimaryKey(id)
             override val foreignKeys : List<ForeignKey> get() = listOf(
@@ -150,7 +150,7 @@ class CreateStatementsTests
             inner class CountryTable : Table(name = "Country")
             {
                 val id = Column(name = "id", type = SQLType.Text, notNull = true)
-                val nameColumn = Column(name = "name", type = SQLType.Text)
+                val name = Column(name = "name", type = SQLType.Text)
 
                 override val primaryKey : PrimaryKey get() = PrimaryKey(id)
                 override val foreignKeys : List<ForeignKey> get() = listOf()
@@ -161,7 +161,7 @@ class CreateStatementsTests
             {
                 val id = Column(name = "id", type = SQLType.Text, notNull = true)
                 val countryId = Column(name = "countryId", type = SQLType.Text, notNull = true)
-                val nameColumn = Column(name = "name", type = SQLType.Text)
+                val name = Column(name = "name", type = SQLType.Text)
 
                 override val primaryKey : PrimaryKey get() = PrimaryKey(id)
                 override val foreignKeys : List<ForeignKey> get() = listOf(
@@ -171,8 +171,8 @@ class CreateStatementsTests
             }
 
             override val indices : List<Index> get() = listOf(
-                Index(table = countryTable, column = countryTable.nameColumn, unique = true),
-                Index(table = cityTable, column = cityTable.nameColumn),
+                Index(table = countryTable, column = countryTable.name, unique = true),
+                Index(table = cityTable, column = cityTable.name),
                 Index(table = cityTable, column = cityTable.countryId))
         }
 
