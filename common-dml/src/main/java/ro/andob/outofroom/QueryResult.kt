@@ -25,10 +25,10 @@ class QueryResult
     fun getBoolean(column : Column) : Boolean =
         cursor.getInt(cursor.getColumnIndexOrThrow(column.name))==true.toInt()
 
-    fun toInt() = cursor.getInt(0)
-    fun toLong() = cursor.getLong(0)
-    fun toFloat() = cursor.getFloat(0)
-    fun toDouble() = cursor.getDouble(0)
+    fun toInt() = cursor.getInt(0)?:0
+    fun toLong() = cursor.getLong(0)?:0L
+    fun toFloat() = cursor.getFloat(0)?:0f
+    fun toDouble() = cursor.getDouble(0)?:0.0
     fun toBoolean() = cursor.getLong(0)!=0L
 
     override fun toString() : String
