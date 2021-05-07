@@ -52,9 +52,9 @@ class NoteDao
     }
 
     private fun queryResultToNote(queryResult : QueryResult) = Note(
-        id = queryResult.getStringId(schema.noteTable.id),
-        title = queryResult.getStringOrNull(schema.noteTable.title)?:"",
-        message = queryResult.getStringOrNull(schema.noteTable.message)?:"")
+        id = queryResult.getStringId(schema.noteTable.id)!!,
+        title = queryResult.getString(schema.noteTable.title)?:"",
+        message = queryResult.getString(schema.noteTable.message)?:"")
 
     private fun populateInsertData(insertData : InsertData, note : Note)
     {

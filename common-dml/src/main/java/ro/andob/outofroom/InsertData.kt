@@ -1,5 +1,8 @@
 package ro.andob.outofroom
 
+import ro.andob.outofroom.optional.toInt
+import ro.andob.outofroom.optional.toLong
+
 class InsertData
 (
     private val statement : IStatement,
@@ -52,8 +55,6 @@ class InsertData
 
     fun putBoolean(column : Column, value : Boolean?)
     {
-        if (value!=null)
-            statement.bindLong(index(column), if (value) 1 else 0)
-        else statement.bindNull(index(column))
+        statement.bindLong(index(column), (value?:false).toLong())
     }
 }

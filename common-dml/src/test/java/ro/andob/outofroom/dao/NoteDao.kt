@@ -49,13 +49,13 @@ class NoteDao
     }
 
     private fun queryResultToNote(queryResult : QueryResult) = Note(
-        id = queryResult.getStringId(schema.noteTable.id),
-        title = queryResult.getStringOrNull(schema.noteTable.title)?:"",
-        message = queryResult.getStringOrNull(schema.noteTable.message)?:"",
-        someInt = queryResult.getInt(schema.noteTable.someInt),
-        someLong = queryResult.getLong(schema.noteTable.someLong),
-        someFloat = queryResult.getFloat(schema.noteTable.someFloat),
-        someDouble = queryResult.getDouble(schema.noteTable.someDouble),
+        id = queryResult.getStringId(schema.noteTable.id)!!,
+        title = queryResult.getString(schema.noteTable.title)?:"",
+        message = queryResult.getString(schema.noteTable.message)?:"",
+        someInt = queryResult.getInt(schema.noteTable.someInt)?:0,
+        someLong = queryResult.getLong(schema.noteTable.someLong)?:0L,
+        someFloat = queryResult.getFloat(schema.noteTable.someFloat)?:0f,
+        someDouble = queryResult.getDouble(schema.noteTable.someDouble)?:0.0,
         someBoolean = queryResult.getBoolean(schema.noteTable.someBoolean))
 
     private fun populateInsertData(insertData : InsertData, note : Note)

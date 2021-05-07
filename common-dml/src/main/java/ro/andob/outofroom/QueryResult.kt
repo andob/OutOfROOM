@@ -1,30 +1,29 @@
 package ro.andob.outofroom
 
+import ro.andob.outofroom.optional.toInt
+
 class QueryResult
 (
     private val cursor : ICursor
 )
 {
-    fun getString(column : Column) : String =
-        cursor.getString(cursor.getColumnIndexOrThrow(column.name))!!
-
-    fun getStringOrNull(column : Column) : String? =
+    fun getString(column : Column) : String? =
         cursor.getString(cursor.getColumnIndexOrThrow(column.name))
 
-    fun getInt(column : Column) : Int =
+    fun getInt(column : Column) : Int? =
         cursor.getInt(cursor.getColumnIndexOrThrow(column.name))
 
-    fun getLong(column : Column) : Long =
+    fun getLong(column : Column) : Long? =
         cursor.getLong(cursor.getColumnIndexOrThrow(column.name))
 
-    fun getFloat(column : Column) : Float =
+    fun getFloat(column : Column) : Float? =
         cursor.getFloat(cursor.getColumnIndexOrThrow(column.name))
 
-    fun getDouble(column : Column) : Double =
+    fun getDouble(column : Column) : Double? =
         cursor.getDouble(cursor.getColumnIndexOrThrow(column.name))
 
     fun getBoolean(column : Column) : Boolean =
-        cursor.getInt(cursor.getColumnIndexOrThrow(column.name))!=0
+        cursor.getInt(cursor.getColumnIndexOrThrow(column.name))==true.toInt()
 
     fun toInt() = cursor.getInt(0)
     fun toLong() = cursor.getLong(0)

@@ -28,7 +28,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'ro.andob.outofroom'
             artifactId 'binding-jdbc'
-            version '1.0.3'
+            version '1.0.4'
             from components.java
         }
     }

@@ -18,3 +18,5 @@ class StringId<T>
     override fun equals(other : Any?) = (other as? StringId<*>)?.value==value
     override fun hashCode() = value.hashCode()
 }
+
+fun <T> String.toStringId() = StringId<T>(this)

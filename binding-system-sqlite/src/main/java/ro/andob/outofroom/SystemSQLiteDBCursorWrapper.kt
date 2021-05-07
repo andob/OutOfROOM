@@ -9,11 +9,13 @@ class SystemSQLiteDBCursorWrapper
 {
     override fun getColumnIndexOrThrow(name : String) : Int = delegate.getColumnIndexOrThrow(name)
 
-    override fun getString(index : Int) : String? = delegate.getString(index)
-    override fun getInt(index : Int) : Int = delegate.getInt(index)
-    override fun getLong(index : Int) : Long = delegate.getLong(index)
-    override fun getFloat(index : Int) : Float = delegate.getFloat(index)
-    override fun getDouble(index : Int) : Double = delegate.getDouble(index)
+    private inline fun <T> nullOr(index : Int, some : () -> T?) : T? = if (delegate.isNull(index)) null else some()
+
+    override fun getString(index : Int) : String? = nullOr(index) { delegate.getString(index) }
+    override fun getInt(index : Int) : Int? = nullOr(index) { delegate.getInt(index) }
+    override fun getLong(index : Int) : Long? = nullOr(index) { delegate.getLong(index) }
+    override fun getFloat(index : Int) : Float? = nullOr(index) { delegate.getFloat(index) }
+    override fun getDouble(index : Int) : Double? = nullOr(index) { delegate.getDouble(index) }
 
     override fun moveToFirst() : Boolean = delegate.moveToFirst()
 
