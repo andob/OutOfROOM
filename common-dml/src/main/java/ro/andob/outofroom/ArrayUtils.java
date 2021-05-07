@@ -27,8 +27,6 @@ public class ArrayUtils
             return "?";
 
         StringBuilder builder=new StringBuilder();
-        builder.append('(');
-
         for (int i=0; i<times; i++)
         {
             builder.append('?');
@@ -36,7 +34,6 @@ public class ArrayUtils
                 builder.append(',');
         }
 
-        builder.append(')');
         return builder.toString();
     }
 }
