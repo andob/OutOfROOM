@@ -41,7 +41,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'ro.andob.outofroom'
             artifactId 'common-query-builder'
-            version '1.1.0'
+            version '1.1.1'
             from components.java
         }
     }

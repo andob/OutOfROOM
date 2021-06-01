@@ -18,6 +18,12 @@ class QueryProjectionClauses : LinkedList<String>()
         return this
     }
 
+    fun addField(fieldName : Column, fromTable : Table, projectAs : Column) : QueryProjectionClauses
+    {
+        add("$fromTable.$fieldName as $projectAs")
+        return this
+    }
+
     fun addField(builder : ProjectionClauseBuilder)
     {
         addField(fieldName = builder.fieldName, fromTable = builder.fromTable, projectAs = builder.projectAs)
@@ -41,4 +47,5 @@ class ProjectionClauseBuilder
 
     internal lateinit var projectAs : String
     fun projectAs(projectAs : String) = also { this.projectAs=projectAs }
+    fun projectAs(projectAs : Column) = also { this.projectAs=projectAs.toString() }
 }
