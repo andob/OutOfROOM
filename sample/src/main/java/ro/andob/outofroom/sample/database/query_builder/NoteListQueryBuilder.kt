@@ -18,7 +18,7 @@ class NoteListQueryBuilder
         if (filter.search!=null)
         {
             conditions.addSearchConditions(
-                filter.search, onColumns = arrayOf(
+                filter.search, columns = arrayOf(
                     schema.noteTable.title,
                     schema.noteTable.message))
         }

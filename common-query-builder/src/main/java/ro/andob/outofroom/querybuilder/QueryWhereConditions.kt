@@ -5,18 +5,26 @@ import java.util.*
 
 class QueryWhereConditions : LinkedList<String>()
 {
-    fun addSearchConditions(search : String?, onColumns : Array<Column>)
+    fun addSearchConditions(search : String?, columns : Array<Column>)
+    {
+        val columnsAsStrings=Array(columns.size, init = { i -> columns[i].toString() })
+        addSearchConditions(search, columnsAsStrings)
+    }
+
+    fun addSearchConditions(search : String?, columns : Array<String>)
     {
         if (search!=null&&search.isNotEmpty())
         {
             val likeArgument="'%${SQLEscape.escapeAndUnquoteString(search)}%'"
 
-            if (onColumns.size==1)
-                add(" ${onColumns[0]} like $likeArgument ")
+            if (columns.size==1)
+            {
+                add(" ${columns[0]} like $likeArgument ")
+            }
             else
             {
                 val subcondition=QueryWhereConditions()
-                for (columnName in onColumns)
+                for (columnName in columns)
                     subcondition.add(" $columnName like $likeArgument ")
                 add("(${subcondition.mergeWithOr()})")
             }
