@@ -1,6 +1,5 @@
 package ro.andob.outofroom
 
-import ro.andob.outofroom.optional.toInt
 import ro.andob.outofroom.optional.toLong
 
 class InsertData
@@ -16,6 +15,12 @@ class InsertData
             throw RuntimeException("Invalid index for column: $column")
 
         return zeroBasedIndex+1
+    }
+
+    fun hasKey(column : Column) : Boolean
+    {
+        val zeroBasedIndex=columns.indexOf(column)
+        return zeroBasedIndex>=0&&zeroBasedIndex<columns.size
     }
 
     fun putString(column : Column, value : String?)

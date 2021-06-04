@@ -3,9 +3,7 @@ package ro.andob.outofroom.querybuilder.querybuilder
 import com.yatatsu.fieldschema.FS
 import ro.andob.outofroom.querybuilder.QueryBuilder
 import ro.andob.outofroom.querybuilder.QueryWhereConditions
-import ro.andob.outofroom.querybuilder.column
 import ro.andob.outofroom.querybuilder.model.RestaurantFilter
-import ro.andob.outofroom.querybuilder.table
 
 class RestaurantListQueryBuilder : QueryBuilder<RestaurantFilter>
 {
