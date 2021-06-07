@@ -1,10 +1,10 @@
 ### OutOfRoom
 
-OutOfRoom is a Database Abstraction Layer I wrote and use to replace the code written with ROOM ORM from my projects. This library is not an ORM and does not pretend to become one. It's just a simple tool to keep ORM-less persistance code clean and organized.
+OutOfRoom is a Database Abstraction Layer developed and used to replace the code written with ROOM ORM from my projects. This library is not an ORM and does not pretend to become one. It's just a simple tool to keep ORM-less persistence code clean and organized.
 
 #### Why?
 
-I have stopped using ORMs. Speeds up initial development, but on large project, ORMs become a bottleneck, too many hacks need to be done if you use very specific SQL features. ORMs also prevents the developer from the ordeal of having to write adapter code between the relational paradigm and object oriented paradigm. Not using an ORM will yield to (some) minimal boilerplate code, yet flexibility advantages are enormous. You can find numerous articles and opinions about this online.
+I have stopped using ORMs. Speeds up initial development, but on large project, ORMs become a bottleneck, too many hacks need to be done if you use very specific SQL features. ORMs also prevents the developer from the ordeal of having to write adapting code between the relational paradigm and object oriented paradigm. Not using an ORM will yield to (some) minimal boilerplate code, yet flexibility advantages are enormous. You can find numerous articles and opinions about this online.
 
 Library goals:
 
@@ -479,10 +479,9 @@ By using the requery SQLite compatibility library, a version of the SQLite libra
 
 This library does not provide an automatic tool to migrate from ROOM. The recommended way to migrate is:
 
-- Write unit tests on the entire persistance layer (on ALL methods from all DAOs)
-- Be sure that all persistance unit tests pass
-- Replace ROOM with OutOfRoom, rewrite code keeping DAO API intact (the method signatures)
-- Run persistance unit tests again, fix the errors
+- Write unit tests on the entire persistence layer (on ALL methods from all DAOs)
+- Replace ROOM with OutOfRoom, rewrite code keeping DAO API (method signatures) intact
+- Run persistence unit tests again, fix the errors
 
 #### License
 
