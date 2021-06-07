@@ -1,8 +1,8 @@
-#### OutOfRoom
+### OutOfRoom
 
 OutOfRoom is a Database Abstraction Layer I wrote and use to replace the code written with ROOM ORM from my projects. This library is not an ORM and does not pretend to become one. It's just a simple tool to keep ORM-less persistance code clean and organized.
 
-##### Why?
+#### Why?
 
 I have stopped using ORMs. Speeds up initial development, but on large project, ORMs become a bottleneck, too many hacks need to be done if you use very specific SQL features. ORMs also prevents the developer from the ordeal of having to write adapter code between the relational paradigm and object oriented paradigm. Not using an ORM will yield to (some) minimal boilerplate code, yet flexibility advantages are enormous. You can find numerous articles and opinions about this online.
 
@@ -13,7 +13,7 @@ Library goals:
 - ability to use system SQLite or [the latest SQLite version provided by requery](https://github.com/requery/sqlite-android)
 - providing maximum flexibility to the developer
 
-##### How to import?
+#### How to import?
 
 ```groovy
 allprojects {
@@ -47,7 +47,7 @@ dependencies {
 }
 ```
 
-##### Defining the models
+#### Defining the models
 
 Define your models as simple POJOs, without any annotations:
 
@@ -70,7 +70,7 @@ enum class NoteColor(val id : Int)
 }
 ```
 
-##### Defining the database schema
+#### Defining the database schema
 
 ```kotlin
 class NotesDatabaseSchema : Schema()
@@ -105,7 +105,7 @@ API reference:
 - ``PrimaryKey`` can be simple: ``PrimaryKey(id)``, composed: ``PrimaryKey(id, name)``  or simple with autoincrement: ``PrimaryKey.AutoIncrement(id)``
 - ``Index`` class represents a table index. Indices can also be unique (just add ``unique = true`` to the index definition to make it unique). There is also a method ``toCreateIndexSQL`` that returns a string with the equivalent ``create index ...`` SQL command.
 
-##### Defining the database open helper
+#### Defining the database open helper
 
 ```kotlin
 class NotesDatabaseOpenHelper
@@ -142,7 +142,7 @@ class NotesDatabaseOpenHelper
 }
 ```
 
-##### Defining the database / DAO container object
+#### Defining the database / DAO container object
 
 ```kotlin
 object NotesDatabase
@@ -170,7 +170,7 @@ class NoteDao
 }
 ```
 
-##### Defining adapter methods inside DAOs
+#### Defining adapter methods inside DAOs
 
 One must define adapter methods that will convert:
 
@@ -239,7 +239,7 @@ fun InsertData.putNoteColor(column : Column, noteColor : NoteColor) = putInt(col
 fun QueryResult.getNoteColor(column : Column) = getInt(column)?.let(::findNoteColor)?:NoteColor.White
 ```
 
-##### DAO - inserting / updating data
+#### DAO - inserting / updating data
 
 Use ``entityManager.insert()`` to insert or update data:
 
@@ -278,7 +278,7 @@ NotesDatabase.noteDao().insert(note)
 NotesDatabase.noteDao().update(note)
 ```
 
-##### DAO - executing SQL commands
+#### DAO - executing SQL commands
 
 Use ``entityManager.exec()`` to execute SQL statements that don't have a result.
 
@@ -316,7 +316,7 @@ NotesDatabase.noteDao().delete(note)
 NotesDatabase.noteDao().deleteAll()
 ```
 
-##### DAO - fetching data
+#### DAO - fetching data
 
 Use ``entityManager.query`` to execute SQL statements that have a result:
 
@@ -380,7 +380,7 @@ val someNotes = NotesDatabase.noteDao().getByIds(listOf(note.id))
 val noteCount = NotesDatabase().noteDao().count()
 ```
 
-##### DAO - using the query builder
+#### DAO - using the query builder
 
 This library also contains a "Query Builder", a clone of my library [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao). With it, you can convert filter objects into select SQL commands. Please read the tutorial from the [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao) documentation. The syntax is very similar:
 
@@ -441,7 +441,7 @@ class NoteQueryBuilder
 val notes = NotesDatabase.noteDao().getFiltered(NoteFilter(search = "test", limit = 100, offset = 0))
 ```
 
-##### Using system SQLite vs Latest SQLite from Requery
+#### Using system SQLite vs Latest SQLite from Requery
 
 To use this library with system SQLite (the SQLite library bundled in the Android operating system), just import relevant components:
 
@@ -475,7 +475,7 @@ import io.requery.android.database.sqlite.SQLiteOpenHelper
 
 By using the requery SQLite compatibility library, a version of the SQLite library will be bundled with your app. This will yield in larger APK size. Advantages of using latest SQLite: speed, security fixes, all your app users will use the exact same SQLite version across a wide range of devices.
 
-##### Migrating from ROOM
+#### Migrating from ROOM
 
 This library does not provide an automatic tool to migrate from ROOM. The recommended way to migrate is:
 
@@ -484,7 +484,7 @@ This library does not provide an automatic tool to migrate from ROOM. The recomm
 - Replace ROOM with OutOfRoom, rewrite code keeping DAO API intact (the method signatures)
 - Run persistance unit tests again, fix the errors
 
-##### License
+#### License
 
 ```
 Copyright 2021 Andrei Dobrescu
