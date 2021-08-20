@@ -8,41 +8,41 @@ class ToStringTests
     @Test
     fun testTableToString()
     {
-        assertEquals("some", "some".table.toString())
-        assertEquals("other", "other".table.toString())
+        assertEquals("some", "some".asTable().toString())
+        assertEquals("other", "other".asTable().toString())
     }
 
     @Test
     fun testColumnToString()
     {
-        assertEquals("some", "some".column.toString())
-        assertEquals("other", "other".column.toString())
+        assertEquals("some", "some".asColumn().toString())
+        assertEquals("other", "other".asColumn().toString())
     }
 
     @Test
     fun testPrimaryKeyToString()
     {
         assertEquals("primary key (`id`)",
-            PrimaryKey("id".column).toString())
+            PrimaryKey("id".asColumn()).toString())
 
         assertEquals("primary key (`name`,`type`)",
-            PrimaryKey("name".column, "type".column).toString())
+            PrimaryKey("name".asColumn(), "type".asColumn()).toString())
     }
 
     @Test
     fun testForeignKeyToString()
     {
         assertEquals("foreign key (`cityId`) references `City`(`id`)",
-            ForeignKey(sourceColumn = "cityId".column, destinationTable = "City".table, destinationColumn = "id".column).toString())
+            ForeignKey(sourceColumn = "cityId".asColumn(), destinationTable = "City".asTable(), destinationColumn = "id".asColumn()).toString())
     }
 
     @Test
     fun testIndexToString()
     {
         assertEquals("create  index if not exists `index_City_id` on `City`(`id`)",
-            Index(table = "City".table, "id".column).toString())
+            Index(table = "City".asTable(), "id".asColumn()).toString())
 
         assertEquals("create unique index if not exists `index_City_id` on `City`(`id`)",
-            Index(table = "City".table, "id".column, unique = true).toString())
+            Index(table = "City".asTable(), "id".asColumn(), unique = true).toString())
     }
 }

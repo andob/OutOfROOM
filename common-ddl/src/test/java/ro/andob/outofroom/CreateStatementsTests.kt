@@ -11,12 +11,12 @@ class CreateStatementsTests
     {
         assertEquals(
             "create  index if not exists `index_City_id` on `City`(`id`)",
-            Index(table = "City".table, "id".column).toString()
+            Index(table = "City".asTable(), "id".asColumn()).toString()
         )
 
         assertEquals(
             "create unique index if not exists `index_City_id` on `City`(`id`)",
-            Index(table = "City".table, "id".column, unique = true).toString()
+            Index(table = "City".asTable(), "id".asColumn(), unique = true).toString()
         )
     }
 

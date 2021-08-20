@@ -15,7 +15,7 @@ class SQLEscapeTests
         override val limit : Int = 100
     })
     {
-        override fun table() = "".table
+        override fun table() = "".asTable()
         override fun where(conditions : QueryWhereConditions) = "1=1"
     }
 

@@ -3,8 +3,6 @@ package ro.andob.outofroom.querybuilder
 import com.yatatsu.fieldschema.FS
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import ro.andob.outofroom.column
-import ro.andob.outofroom.table
 
 class QueryWhereConditionsTests
 {
@@ -33,7 +31,7 @@ class QueryWhereConditionsTests
         val restaurantId=5
         val restaurantRating=5
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column))
+        conditions.addSearchConditions(search, columns = arrayOf(FS.Restaurant_name.asColumn()))
         conditions.add("${FS.Restaurant_id} = $restaurantId")
         conditions.add("${FS.Restaurant_rating} = $restaurantRating")
 
@@ -55,7 +53,7 @@ class QueryWhereConditionsTests
         val restaurantId=5
         val restaurantRating=5
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column, FS.RestaurantJoin_cityName.column))
+        conditions.addSearchConditions(search, columns = arrayOf(FS.Restaurant_name.asColumn(), FS.RestaurantJoin_cityName.asColumn()))
         conditions.add("${FS.Restaurant_id} = $restaurantId")
         conditions.add("${FS.Restaurant_rating} = $restaurantRating")
 
@@ -77,7 +75,7 @@ class QueryWhereConditionsTests
 
         val search="string to search"
 
-        conditions.addSearchConditions(search, onColumns = arrayOf(FS.Restaurant_name.column, FS.RestaurantJoin_cityName.column))
+        conditions.addSearchConditions(search, columns = arrayOf(FS.Restaurant_name.asColumn(), FS.RestaurantJoin_cityName.asColumn()))
 
         val firstRestaurantId=5
         val firstRestaurantRating=5

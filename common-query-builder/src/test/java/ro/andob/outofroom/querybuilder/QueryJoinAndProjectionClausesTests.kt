@@ -12,16 +12,16 @@ class QueryJoinAndProjectionClausesTests
         val clauses=QueryJoinClauses()
 
         clauses.addInnerJoin(
-            table = FS.Restaurant.table,
-            column = FS.Restaurant_cityId.column,
-            remoteTable = FS.City.table,
-            remoteColumn = FS.City_id.column)
+            table = FS.Restaurant.asTable(),
+            column = FS.Restaurant_cityId.asColumn(),
+            remoteTable = FS.City.asTable(),
+            remoteColumn = FS.City_id.asColumn())
 
         clauses.addLeftOuterJoin(
-            table = FS.City.table,
-            column = FS.City_countryId.column,
-            remoteTable = FS.Country.table,
-            remoteColumn = FS.Country_id.column)
+            table = FS.City.asTable(),
+            column = FS.City_countryId.asColumn(),
+            remoteTable = FS.Country.asTable(),
+            remoteColumn = FS.Country_id.asColumn())
 
         val resultQuery="select * from ${FS.Restaurant} ${clauses.merge()!!}".removeUnnecessarySpaces()
         val expectedQuery="select * from ${FS.Restaurant} "+
@@ -37,16 +37,16 @@ class QueryJoinAndProjectionClausesTests
         val clauses=QueryJoinClauses()
 
         clauses.addRightOuterJoin(
-            table = FS.Restaurant.table,
-            column = FS.Restaurant_cityId.column,
-            remoteTable = FS.City.table,
-            remoteColumn = FS.City_id.column)
+            table = FS.Restaurant.asTable(),
+            column = FS.Restaurant_cityId.asColumn(),
+            remoteTable = FS.City.asTable(),
+            remoteColumn = FS.City_id.asColumn())
 
         clauses.addCrossJoin(
-            table = FS.City.table,
-            column = FS.City_countryId.column,
-            remoteTable = FS.Country.table,
-            remoteColumn = FS.Country_id.column)
+            table = FS.City.asTable(),
+            column = FS.City_countryId.asColumn(),
+            remoteTable = FS.Country.asTable(),
+            remoteColumn = FS.Country_id.asColumn())
 
         val resultQuery="select * from ${FS.Restaurant} ${clauses.merge()!!}".removeUnnecessarySpaces()
         val expectedQuery="select * from ${FS.Restaurant} "+
@@ -63,27 +63,27 @@ class QueryJoinAndProjectionClausesTests
         val projectionClauses=QueryProjectionClauses()
 
         joinClauses.addFullOuterJoin(
-            table = FS.Restaurant.table,
-            column = FS.Restaurant_cityId.column,
-            remoteTable = FS.City.table,
-            remoteColumn = FS.City_id.column)
+            table = FS.Restaurant.asTable(),
+            column = FS.Restaurant_cityId.asColumn(),
+            remoteTable = FS.City.asTable(),
+            remoteColumn = FS.City_id.asColumn())
 
         joinClauses.addFullOuterJoin(
-            table = FS.City.table,
-            column = FS.City_countryId.column,
-            remoteTable = FS.Country.table,
-            remoteColumn = FS.Country_id.column)
+            table = FS.City.asTable(),
+            column = FS.City_countryId.asColumn(),
+            remoteTable = FS.Country.asTable(),
+            remoteColumn = FS.Country_id.asColumn())
 
-        projectionClauses.addAllFieldsFromTable(FS.Restaurant.table)
+        projectionClauses.addAllFieldsFromTable(FS.Restaurant.asTable())
 
         projectionClauses.addField(
-            FS.City_name.column,
-            fromTable = FS.City.table,
+            FS.City_name.asColumn(),
+            fromTable = FS.City.asTable(),
             projectAs = FS.RestaurantJoin_cityName)
 
         projectionClauses.addField(
-            FS.Country_name.column,
-            fromTable = FS.Country.table,
+            FS.Country_name.asColumn(),
+            fromTable = FS.Country.asTable(),
             projectAs = FS.RestaurantJoin_countryName)
 
         val resultQuery="select ${projectionClauses.merge()} from ${FS.Restaurant} ${joinClauses.merge()!!}".removeUnnecessarySpaces()
