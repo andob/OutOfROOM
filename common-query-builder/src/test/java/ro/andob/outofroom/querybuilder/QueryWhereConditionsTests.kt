@@ -3,6 +3,8 @@ package ro.andob.outofroom.querybuilder
 import com.yatatsu.fieldschema.FS
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import ro.andob.outofroom.column
+import ro.andob.outofroom.table
 
 class QueryWhereConditionsTests
 {
