@@ -61,8 +61,8 @@ dependencies {
     implementation 'ro.andob.declarativeadapter:viewbinding-compat:1.3.0.0'
 
     //bundle args
-    implementation 'ro.andob.bundleargs:bundleargs-annotation:2.1.3'
-    kapt 'ro.andob.bundleargs:bundleargs-processor:2.1.3'
+    implementation 'ro.andob.bundleargs:bundleargs-annotation:2.1.4'
+    kapt 'ro.andob.bundleargs:bundleargs-processor:2.1.4'
 
     //koin
     implementation "io.insert-koin:koin-core:3.0.1"
