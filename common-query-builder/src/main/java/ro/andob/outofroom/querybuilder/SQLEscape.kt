@@ -1,5 +1,7 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.QueryArgumentConverter
+
 object SQLEscape
 {
     @JvmStatic
@@ -103,4 +105,35 @@ object SQLEscape
     @JvmStatic
     fun escapeBoolean(value : Boolean) : Int =
         if (value) 1 else 0
+
+    @JvmStatic
+    fun escapeArray(array : Array<*>, queryArgumentConverter : QueryArgumentConverter) =
+        escapeCollection(array.toList(), queryArgumentConverter)
+
+    @JvmStatic
+    @Suppress("UNCHECKED_CAST")
+    fun escapeCollection(collection : Collection<*>, queryArgumentConverter : QueryArgumentConverter) : String
+    {
+        if (collection.isEmpty())
+            throw RuntimeException("Cannot escape empty collection")
+
+        (collection.first() as? String)?.let {
+            return escapeStringCollection(collection as Collection<String>)
+        }
+
+        (collection.first() as? Number)?.let {
+            return escapeNumberCollection(collection as Collection<Number>)
+        }
+
+        val convertedCollection=collection.map(queryArgumentConverter::convert)
+        (convertedCollection.first() as? String)?.let {
+            return escapeStringCollection(convertedCollection as Collection<String>)
+        }
+
+        (convertedCollection.first() as? Number)?.let {
+            return escapeNumberCollection(convertedCollection as Collection<Number>)
+        }
+
+        throw RuntimeException("Cannot escape ${collection.first()!!::class.java.name}")
+    }
 }

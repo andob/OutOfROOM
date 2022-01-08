@@ -9,12 +9,10 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation project(":common-ddl")
-
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.xerial:sqlite-jdbc:3.31.1'
-    testImplementation project(":binding-jdbc")
+    implementation project(":common-dml")
 }
 
 publishing {
@@ -29,7 +27,7 @@ publishing {
 
         maven(MavenPublication) {
             groupId 'ro.andob.outofroom'
-            artifactId 'common-dml'
+            artifactId 'processor'
             version '1.2.0'
             from components.java
         }

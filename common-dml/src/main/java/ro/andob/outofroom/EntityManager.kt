@@ -2,7 +2,8 @@ package ro.andob.outofroom
 
 class EntityManager
 (
-    val database : IDatabase
+    val database : IDatabase,
+    val queryArgumentConverter : QueryArgumentConverter,
 )
 {
     inline fun <MODEL> query
@@ -14,7 +15,7 @@ class EntityManager
     {
         val items=mutableListOf<MODEL>()
 
-        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(arguments)
+        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
 
         database.rawQuery(sql, argumentsStringArray).use { cursor ->
             val queryResult=QueryResult(cursor)
@@ -34,7 +35,7 @@ class EntityManager
         arguments : Array<Any?> = arrayOf(),
     )
     {
-        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(arguments)
+        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
 
         database.execSQL(sql, argumentsStringArray)
     }
@@ -51,7 +52,7 @@ class EntityManager
         val questionMarks=columns.joinToString(separator = ",", transform = { "?" })
 
         database.compileStatement("insert or $or into $table($columnNames) values ($questionMarks)").use { statement ->
-            adapter(InsertData(statement, columns))
+            adapter(InsertDataImpl(statement, columns))
             statement.executeInsert()
         }
     }

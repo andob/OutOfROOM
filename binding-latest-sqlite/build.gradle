@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
     buildTypes {
         release {
@@ -15,8 +15,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -30,7 +30,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'com.github.requery:sqlite-android:3.35.5'
-    implementation 'androidx.sqlite:sqlite-ktx:2.1.0'
+    implementation 'androidx.sqlite:sqlite-ktx:2.2.0'
 
     implementation project(":common-ddl")
     implementation project(":common-dml")
@@ -51,7 +51,7 @@ project.afterEvaluate {
             maven(MavenPublication) {
                 groupId 'ro.andob.outofroom'
                 artifactId 'binding-latest-sqlite'
-                version '1.1.4'
+                version '1.2.0'
                 artifact(bundleReleaseAar)
             }
         }

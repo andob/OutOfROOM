@@ -1,7 +1,9 @@
 package ro.andob.outofroom.querybuilder
 
+import ro.andob.outofroom.QueryArgumentConverter
 import ro.andob.outofroom.Table
 
+@Suppress("UNCHECKED_CAST")
 abstract class QueryBuilder
 <FILTER : IQueryBuilderFilter>
 (val filter : FILTER)
@@ -41,6 +43,7 @@ abstract class QueryBuilder
     abstract fun where(conditions : QueryWhereConditions) : String?
     open fun orderBy() : String? = null
     open fun isPaginationEnabled() : Boolean = QueryBuilderDefaults.isPaginationEnabled
+    open fun getQueryArgumentConverter() = QueryArgumentConverter.identity()
 
     val String.sqlEscaped get() = SQLEscape.escapeString(this)
     val IntArray.sqlEscaped get() = SQLEscape.escapeNumberArray(this)
@@ -48,22 +51,6 @@ abstract class QueryBuilder
     val DoubleArray.sqlEscaped get() = SQLEscape.escapeNumberArray(this)
     val FloatArray.sqlEscaped get() = SQLEscape.escapeNumberArray(this)
     val Boolean.sqlEscaped get() = SQLEscape.escapeBoolean(this)
-
-    val Array<*>.sqlEscaped get() =
-        if (firstOrNull()!=null&&first() is String)
-            SQLEscape.escapeStringArray(this as Array<String>)
-        else if (firstOrNull()!=null&&first() is Number)
-            SQLEscape.escapeNumberCollection(toList())
-        else if (firstOrNull()!=null)
-            throw RuntimeException("Cannot escape ${first()!!::class.java.name}")
-        else throw RuntimeException("Cannot escape empty collection")
-
-    val Collection<*>.sqlEscaped get() =
-        if (firstOrNull()!=null&&first() is String)
-            SQLEscape.escapeStringCollection(this as Collection<String>)
-        else if (firstOrNull()!=null&&first() is Number)
-            SQLEscape.escapeNumberCollection(this)
-        else if (firstOrNull()!=null)
-            throw RuntimeException("Cannot escape ${first()!!::class.java.name}")
-        else throw RuntimeException("Cannot escape empty collection")
+    val Array<*>.sqlEscaped get() = SQLEscape.escapeArray(this, getQueryArgumentConverter())
+    val Collection<*>.sqlEscaped get() = SQLEscape.escapeCollection(this, getQueryArgumentConverter())
 }

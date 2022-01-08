@@ -5,8 +5,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'idea'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 idea {
@@ -20,6 +20,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation project(":common-ddl")
+    implementation project(":common-dml")
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'javax.persistence:javax.persistence-api:2.2'
@@ -41,7 +42,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'ro.andob.outofroom'
             artifactId 'common-query-builder'
-            version '1.1.4'
+            version '1.2.0'
             from components.java
         }
     }

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ArrayUtils
 {
-    public static @NotNull String[] convertObjectArrayToStringArray(@Nullable Object[] objects)
+    public static @NotNull String[] convertObjectArrayToStringArray(QueryArgumentConverter argumentConverter, @Nullable Object[] objects)
     {
         if (objects==null)
             return new String[] {};
@@ -14,7 +14,12 @@ public class ArrayUtils
         for (int i=0; i<objects.length; i++)
         {
             if (objects[i]!=null)
-                strings[i]=objects[i].toString();
+            {
+                Object convertedObject=argumentConverter.convert(objects[i]);
+                if (convertedObject!=null)
+                    strings[i]=convertedObject.toString();
+                else strings[i]="";
+            }
             else strings[i]="";
         }
 

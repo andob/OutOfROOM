@@ -12,7 +12,7 @@ object TestDatabase
         return@lazy connection
     }
 
-    private val entityManager = EntityManager(JDBCConnectionWrapper { connection })
+    private val entityManager = EntityManagerBuilder(connection).build()
     private val schema get() = TestDatabaseSchema
 
     val noteDao = NoteDao(entityManager, schema)

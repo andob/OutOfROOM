@@ -10,6 +10,7 @@ echo "Publishing..."
 ./gradlew :common-ddl:publish
 ./gradlew :common-dml:publish
 ./gradlew :common-query-builder:publish
+./gradlew :processor:publish
 ./gradlew :binding-jdbc:publish
 ./gradlew :binding-latest-sqlite:publish
 ./gradlew :binding-system-sqlite:publish
