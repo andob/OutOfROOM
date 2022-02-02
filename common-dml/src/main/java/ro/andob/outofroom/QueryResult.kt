@@ -30,10 +30,4 @@ class QueryResult
     fun toFloat() = cursor.getFloat(0)?:0f
     fun toDouble() = cursor.getDouble(0)?:0.0
     fun toBoolean() = cursor.getLong(0)!=0L
-
-    override fun toString() : String
-    {
-        return try { cursor.getString(1)?:"" }
-        catch (ex : Throwable) { "" }
-    }
 }
