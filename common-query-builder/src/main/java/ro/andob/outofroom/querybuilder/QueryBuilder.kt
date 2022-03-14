@@ -43,7 +43,7 @@ abstract class QueryBuilder
     abstract fun where(conditions : QueryWhereConditions) : String?
     open fun orderBy() : String? = null
     open fun isPaginationEnabled() : Boolean = QueryBuilderDefaults.isPaginationEnabled
-    open fun getQueryArgumentConverter() = QueryArgumentConverter.identity()
+    open fun getQueryArgumentConverter() = QueryArgumentConverter { a -> a }
 
     val String.sqlEscaped get() = SQLEscape.escapeString(this)
     val IntArray.sqlEscaped get() = SQLEscape.escapeNumberArray(this)

@@ -10,8 +10,6 @@ public interface QueryArgumentConverter
 {
     Object convert(Object object);
 
-    static QueryArgumentConverter identity() { return a -> a; }
-
     @Documented
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.CLASS)
