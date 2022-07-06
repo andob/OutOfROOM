@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         applicationId "ro.andob.outofroom.sample"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -43,8 +43,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     //appcompat
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -65,7 +65,7 @@ dependencies {
     kapt 'ro.andob.bundleargs:bundleargs-processor:2.1.4'
 
     //koin
-    implementation "io.insert-koin:koin-core:3.0.1"
+    implementation "io.insert-koin:koin-core:3.2.0"
     implementation "io.insert-koin:koin-android-ext:3.0.1"
 
     //out of room

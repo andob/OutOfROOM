@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
     }
     buildTypes {
         release {
@@ -48,7 +48,7 @@ project.afterEvaluate {
             maven(MavenPublication) {
                 groupId 'ro.andob.outofroom'
                 artifactId 'binding-system-sqlite'
-                version '1.2.1'
+                version '1.2.2'
                 artifact(bundleReleaseAar)
             }
         }

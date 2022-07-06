@@ -27,10 +27,10 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.1'
-    implementation 'ro.andob.outofroom:common-dml:1.2.1'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.1'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.1'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.2'
+    implementation 'ro.andob.outofroom:common-dml:1.2.2'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.2'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.2'
 }
 ```
 
@@ -38,10 +38,10 @@ To use with [the latest SQLite version provided by requery](https://github.com/r
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.1'
-    implementation 'ro.andob.outofroom:common-dml:1.2.1'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.1'
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.1'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.2'
+    implementation 'ro.andob.outofroom:common-dml:1.2.2'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.2'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.2'
     implementation 'com.github.requery:sqlite-android:3.35.5'
     implementation 'androidx.sqlite:sqlite-ktx:2.2.0'
 }
@@ -446,7 +446,7 @@ val notes = NotesDatabase.noteDao().getFiltered(NoteFilter(search = "test", limi
 To use this library with system SQLite (the SQLite library bundled in the Android operating system), just import relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.1'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.2'
 ```
 
 ```
@@ -461,7 +461,7 @@ import android.database.sqlite.SQLiteOpenHelper
 To use this library with the latest SQLite version provided by requery, just import relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.1'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.2'
 ```
 
 ```
