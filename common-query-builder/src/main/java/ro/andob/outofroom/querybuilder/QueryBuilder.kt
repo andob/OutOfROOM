@@ -4,9 +4,11 @@ import ro.andob.outofroom.QueryArgumentConverter
 import ro.andob.outofroom.Table
 
 @Suppress("UNCHECKED_CAST")
-abstract class QueryBuilder
-<FILTER : IQueryBuilderFilter>
-(val filter : FILTER)
+abstract class QueryBuilder<FILTER>
+(
+    val filter : FILTER,
+    private val page : Page = Page(),
+)
 {
     fun build() : String
     {
@@ -30,8 +32,10 @@ abstract class QueryBuilder
 
         if (isPaginationEnabled())
         {
-            sql+=" limit ${filter.limit} "
-            sql+=" offset ${filter.offset} "
+            if (page.limit!=null)
+                sql+=" limit ${page.limit} "
+            if (page.offset!=null)
+                sql+=" offset ${page.offset} "
         }
 
         return sql

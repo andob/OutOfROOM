@@ -8,18 +8,12 @@ import ro.andob.outofroom.querybuilder.model.Restaurant
 
 class SQLEscapeTests
 {
-    val dummyQueryBuilder=object : QueryBuilder<IQueryBuilderFilter>(object : IQueryBuilderFilter
-    {
-        override val search : String? = null
-        override val offset : Int = 0
-        override val limit : Int = 100
-    })
-    {
-        override fun table() = "".asTable()
-        override fun where(conditions : QueryWhereConditions) = "1=1"
-    }
-
-    inline fun runOnQueryBuilder(toRun : QueryBuilder<IQueryBuilderFilter>.() -> (Unit)) = toRun(dummyQueryBuilder)
+    private inline fun runOnQueryBuilder(toRun : QueryBuilder<Unit>.() -> (Unit)) =
+        object : QueryBuilder<Unit>(filter = Unit, page = Page(limit = 100, offset = 0))
+        {
+            override fun table() = "".asTable()
+            override fun where(conditions : QueryWhereConditions) = "1=1"
+        }.let(toRun)
 
     @Test
     fun testStringEscape()

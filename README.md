@@ -27,10 +27,10 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.3'
-    implementation 'ro.andob.outofroom:common-dml:1.2.3'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.3'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.3'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.4'
+    implementation 'ro.andob.outofroom:common-dml:1.2.4'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.4'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.4'
 }
 ```
 
@@ -38,10 +38,10 @@ To use with [the latest SQLite version provided by requery](https://github.com/r
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.3'
-    implementation 'ro.andob.outofroom:common-dml:1.2.3'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.3'
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.3'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.4'
+    implementation 'ro.andob.outofroom:common-dml:1.2.4'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.4'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.4'
     implementation 'com.github.requery:sqlite-android:3.39.2'
     implementation 'androidx.sqlite:sqlite-ktx:2.2.0'
 }
@@ -385,12 +385,7 @@ val noteCount = NotesDatabase().noteDao().count()
 This library also contains a "Query Builder", a clone of my library [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao). With it, you can convert filter objects into select SQL commands. Please read the tutorial from the [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao) documentation. The syntax is very similar:
 
 ```kotlin
-data class NoteFilter
-(
-    override val limit : Int,
-    override val offset : Int,
-    override val search : String?
-) : IQueryBuilderFilter
+data class NoteFilter(val searchTerm : String?)
 ```
 
 ```kotlin
@@ -423,10 +418,10 @@ class NoteQueryBuilder
 
     override fun where(conditions : QueryWhereConditions) : String
     {
-        if (filter.search != null)
+        if (filter.searchTerm != null)
         {
             conditions.addSearchConditions(
-                search = filter.search, columns = arrayOf(
+                search = filter.searchTerm, columns = arrayOf(
                     schema.noteTable.title,
                     schema.noteTable.contents,
                 ))
@@ -446,7 +441,7 @@ val notes = NotesDatabase.noteDao().getFiltered(NoteFilter(search = "test", limi
 To use this library with system SQLite (the SQLite library bundled in the Android operating system), just import relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.3'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.4'
 ```
 
 ```
@@ -461,7 +456,7 @@ import android.database.sqlite.SQLiteOpenHelper
 To use this library with the latest SQLite version provided by requery, just import relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.3'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.4'
 ```
 
 ```

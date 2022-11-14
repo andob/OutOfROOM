@@ -6,7 +6,7 @@ import ro.andob.outofroom.querybuilder.model.RestaurantFilter
 
 class RestaurantJoinListQueryBuilder : QueryBuilder<RestaurantFilter>
 {
-    constructor(filter : RestaurantFilter) : super(filter)
+    constructor(filter : RestaurantFilter, page : Page) : super(filter, page)
 
     override fun table() = FS.Restaurant.asTable()
 
