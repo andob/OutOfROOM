@@ -113,6 +113,12 @@ ${insertDataExtensionMethods.map { extensionMethod ->
         {
             interceptedValue=value;
         }
+        
+        @Override
+        public void putBytes(Column column, byte[] value)
+        {
+            interceptedValue=value;
+        }
     }
 }
 """

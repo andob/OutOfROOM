@@ -27,10 +27,10 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.6'
-    implementation 'ro.andob.outofroom:common-dml:1.2.6'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.6'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.6'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.7'
+    implementation 'ro.andob.outofroom:common-dml:1.2.7'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.7'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.7'
 }
 ```
 
@@ -38,10 +38,10 @@ To use with [the latest SQLite version provided by requery](https://github.com/r
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.6'
-    implementation 'ro.andob.outofroom:common-dml:1.2.6'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.6'
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.6'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.7'
+    implementation 'ro.andob.outofroom:common-dml:1.2.7'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.7'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.7'
     implementation 'com.github.requery:sqlite-android:3.39.2'
     implementation 'androidx.sqlite:sqlite-ktx:2.2.0'
 }
