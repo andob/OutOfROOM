@@ -62,4 +62,11 @@ class InsertDataImpl
     {
         statement.bindLong(index(column), (value?:false).toLong())
     }
+
+    override fun putBytes(column : Column, value : ByteArray?)
+    {
+        if (value!=null)
+            statement.bindBytes(index(column), value)
+        else statement.bindNull(index(column))
+    }
 }

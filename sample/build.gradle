@@ -66,7 +66,7 @@ dependencies {
     kapt 'ro.andob.bundleargs:bundleargs-processor:2.2.0'
 
     //koin
-    implementation "io.insert-koin:koin-core:3.2.0"
+    implementation "io.insert-koin:koin-core:3.2.2"
     implementation "io.insert-koin:koin-android-ext:3.0.1"
 
     //out of room

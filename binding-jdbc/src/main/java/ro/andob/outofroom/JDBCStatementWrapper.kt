@@ -11,6 +11,7 @@ class JDBCStatementWrapper
     override fun bindString(index : Int, value : String) = statement.setString(index, value)
     override fun bindLong(index : Int, value : Long) = statement.setLong(index, value)
     override fun bindDouble(index : Int, value : Double) = statement.setDouble(index, value)
+    override fun bindBytes(index : Int, value : ByteArray) = statement.setBytes(index, value)
 
     override fun bindNull(index : Int) = statement.setNull(index, Types.NULL)
 

@@ -10,4 +10,5 @@ interface InsertData
     fun putFloat(column : Column, value : Float?)
     fun putDouble(column : Column, value : Double?)
     fun putBoolean(column : Column, value : Boolean?)
+    fun putBytes(column : Column, value : ByteArray?)
 }

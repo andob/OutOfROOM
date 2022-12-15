@@ -27,10 +27,10 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.4'
-    implementation 'ro.andob.outofroom:common-dml:1.2.4'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.4'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.4'
+    implementation 'ro.andob.outofroom:common-ddl:1.2.5'
+    implementation 'ro.andob.outofroom:common-dml:1.2.5'
+    implementation 'ro.andob.outofroom:common-query-builder:1.2.5'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.5'
 }
 ```
 
