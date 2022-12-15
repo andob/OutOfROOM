@@ -27,7 +27,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'ro.andob.outofroom'
             artifactId 'processor'
-            version '1.2.5'
+            version '1.2.6'
             from components.java
         }
     }

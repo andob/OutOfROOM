@@ -11,6 +11,7 @@ interface ICursor : Closeable
     fun getLong(index : Int) : Long?
     fun getFloat(index : Int) : Float?
     fun getDouble(index : Int) : Double?
+    fun getBytes(index : Int) : ByteArray?
 
     fun moveToFirst() : Boolean
     fun moveToNext() : Boolean

@@ -25,6 +25,9 @@ class QueryResult
     fun getBoolean(column : Column) : Boolean =
         cursor.getInt(cursor.getColumnIndexOrThrow(column.name))==true.toInt()
 
+    fun getBytes(column : Column) : ByteArray? =
+        cursor.getBytes(cursor.getColumnIndexOrThrow(column.name))
+
     fun toInt() = cursor.getInt(0)?:0
     fun toLong() = cursor.getLong(0)?:0L
     fun toFloat() = cursor.getFloat(0)?:0f

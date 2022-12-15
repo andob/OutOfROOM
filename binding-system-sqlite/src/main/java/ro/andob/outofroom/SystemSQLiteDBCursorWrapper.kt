@@ -16,6 +16,7 @@ class SystemSQLiteDBCursorWrapper
     override fun getLong(index : Int) : Long? = nullOr(index) { delegate.getLong(index) }
     override fun getFloat(index : Int) : Float? = nullOr(index) { delegate.getFloat(index) }
     override fun getDouble(index : Int) : Double? = nullOr(index) { delegate.getDouble(index) }
+    override fun getBytes(index : Int) : ByteArray? = nullOr(index) { delegate.getBlob(index) }
 
     override fun moveToFirst() : Boolean = delegate.moveToFirst()
 

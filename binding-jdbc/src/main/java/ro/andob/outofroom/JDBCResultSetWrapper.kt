@@ -14,6 +14,7 @@ class JDBCResultSetWrapper
     override fun getLong(index : Int) : Long = resultSet.getLong(index+1)
     override fun getFloat(index : Int) : Float = resultSet.getFloat(index+1)
     override fun getDouble(index : Int) : Double = resultSet.getDouble(index+1)
+    override fun getBytes(index : Int) : ByteArray? = resultSet.getBytes(index+1)
 
     override fun moveToFirst() : Boolean = resultSet.first()
     override fun moveToNext() : Boolean = resultSet.next()
