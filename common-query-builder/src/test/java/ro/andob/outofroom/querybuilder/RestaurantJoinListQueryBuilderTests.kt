@@ -15,7 +15,7 @@ class RestaurantJoinListQueryBuilderTests
         val page=Page(limit = 100, offset = 1)
 
         val queryBuilder=RestaurantJoinListQueryBuilder(filter, page)
-        val resultQuery=queryBuilder.build().removeUnnecessarySpaces()
+        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
         val expectedQuery="select ${FS.Restaurant}.*, "+
                     "${FS.City}.${FS.City_name} as ${FS.RestaurantJoin_cityName}, "+
                     "${FS.Country}.${FS.Country_name} as ${FS.RestaurantJoin_countryName} "+
@@ -28,7 +28,7 @@ class RestaurantJoinListQueryBuilderTests
                     "limit ${page.limit} offset ${page.offset}"
                 else "")
 
-        assertEquals(resultQuery, expectedQuery.trim())
+        assertEquals(expectedQuery.trim(), resultQuery)
     }
 
     @Test

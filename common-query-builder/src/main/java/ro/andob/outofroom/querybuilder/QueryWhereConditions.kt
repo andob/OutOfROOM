@@ -7,27 +7,27 @@ class QueryWhereConditions : LinkedList<String>()
 {
     fun addSearchConditions(search : String?, columns : Array<Column>)
     {
-        val columnsAsStrings=Array(columns.size, init = { i -> columns[i].toString() })
-        addSearchConditions(search, columnsAsStrings)
+        addSearchConditions(search?.let(::setOf)?:setOf(), columns)
     }
 
-    fun addSearchConditions(search : String?, columns : Array<String>)
+    fun addSearchConditions(searchTerms : Set<String>, columns : Array<Column>)
     {
-        if (search!=null&&search.isNotEmpty())
+        if (searchTerms.size==1&&columns.size==1)
         {
-            val likeArgument="'%${SQLEscape.escapeAndUnquoteString(search)}%'"
+            val likeArgument="'%${SQLEscape.escapeAndUnquoteString(searchTerms.first())}%'"
+            add(" ${columns[0]} like $likeArgument ")
+        }
+        else
+        {
+            val subcondition=QueryWhereConditions()
+            for (searchTerm in searchTerms)
+            {
+                val likeArgument="'%${SQLEscape.escapeAndUnquoteString(searchTerm)}%'"
+                for (column in columns)
+                    subcondition.add(" $column like $likeArgument ")
+            }
 
-            if (columns.size==1)
-            {
-                add(" ${columns[0]} like $likeArgument ")
-            }
-            else
-            {
-                val subcondition=QueryWhereConditions()
-                for (columnName in columns)
-                    subcondition.add(" $columnName like $likeArgument ")
-                add("(${subcondition.mergeWithOr()})")
-            }
+            add("(${subcondition.mergeWithOr()})")
         }
     }
 

@@ -15,10 +15,10 @@ class RestaurantListQueryBuilderTests
         val filter=RestaurantFilter()
 
         val queryBuilder=RestaurantListQueryBuilder(filter)
-        val resultQuery=queryBuilder.build().removeUnnecessarySpaces()
+        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
         val expectedQuery="select * from ${FS.Restaurant} where 1==1"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -27,11 +27,14 @@ class RestaurantListQueryBuilderTests
         val filter=RestaurantFilter().copy(rating = 4)
 
         val queryBuilder=RestaurantListQueryBuilder(filter)
-        val resultQuery=queryBuilder.build().removeUnnecessarySpaces()
+        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
+        val resultArgs=queryBuilder.build().second.toList()
         val expectedQuery="select * from ${FS.Restaurant} "+
-                "where ${FS.Restaurant_rating} = ${filter.rating}"
+                "where ${FS.Restaurant_rating} = ?"
+        val expectedArgs=listOf(filter.rating)
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
+        assertEquals(expectedArgs, resultArgs)
     }
 
     @Test
@@ -42,12 +45,16 @@ class RestaurantListQueryBuilderTests
             southEastLat = 3.0, southEastLng = 4.0))
 
         val queryBuilder=RestaurantListQueryBuilder(filter)
-        val resultQuery=queryBuilder.build().removeUnnecessarySpaces()
+        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
+        val resultArgs=queryBuilder.build().second.toList()
         val expectedQuery="select * from ${FS.Restaurant} "+
-                "where ${FS.Restaurant_latitude} <= ${filter.boundingBox!!.northWestLat} and ${FS.Restaurant_latitude} >= ${filter.boundingBox!!.southEastLat} "+
-                "and ${FS.Restaurant_longitude} >= ${filter.boundingBox!!.northWestLng} and ${FS.Restaurant_longitude} <= ${filter.boundingBox!!.southEastLng}"
+                "where ${FS.Restaurant_latitude} <= ? and ${FS.Restaurant_latitude} >= ? "+
+                "and ${FS.Restaurant_longitude} >= ? and ${FS.Restaurant_longitude} <= ?"
+        val expectedArgs=listOf(filter.boundingBox?.northWestLat, filter.boundingBox?.southEastLat,
+            filter.boundingBox?.northWestLng, filter.boundingBox?.southEastLng)
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
+        assertEquals(expectedArgs, resultArgs)
     }
 
     @Test
@@ -60,12 +67,17 @@ class RestaurantListQueryBuilderTests
                 southEastLat = 3.0, southEastLng = 4.0))
 
         val queryBuilder=RestaurantListQueryBuilder(filter)
-        val resultQuery=queryBuilder.build().removeUnnecessarySpaces()
+        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
+        val resultArgs=queryBuilder.build().second.toList()
         val expectedQuery="select * from ${FS.Restaurant} "+
-                "where ${FS.Restaurant_rating} = ${filter.rating} "+
-                "and ${FS.Restaurant_latitude} <= ${filter.boundingBox!!.northWestLat} and ${FS.Restaurant_latitude} >= ${filter.boundingBox!!.southEastLat} "+
-                "and ${FS.Restaurant_longitude} >= ${filter.boundingBox!!.northWestLng} and ${FS.Restaurant_longitude} <= ${filter.boundingBox!!.southEastLng}"
+                "where ${FS.Restaurant_rating} = ? "+
+                "and ${FS.Restaurant_latitude} <= ? and ${FS.Restaurant_latitude} >= ? "+
+                "and ${FS.Restaurant_longitude} >= ? and ${FS.Restaurant_longitude} <= ?"
+        val expectedArgs=listOf(filter.rating, filter.boundingBox?.northWestLat,
+            filter.boundingBox?.southEastLat, filter.boundingBox?.northWestLng,
+            filter.boundingBox?.southEastLng)
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
+        assertEquals(expectedArgs, resultArgs)
     }
 }

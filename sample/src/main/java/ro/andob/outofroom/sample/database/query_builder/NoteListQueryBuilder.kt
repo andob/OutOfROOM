@@ -13,7 +13,7 @@ class NoteListQueryBuilder
 {
     override fun table() = schema.noteTable
 
-    override fun where(conditions : QueryWhereConditions) : String
+    override fun where(conditions : QueryWhereConditions) : Pair<String, Array<Any?>>
     {
         if (filter.search!=null)
         {
@@ -23,7 +23,7 @@ class NoteListQueryBuilder
                     schema.noteTable.message))
         }
 
-        return conditions.mergeWithAnd()
+        return conditions.mergeWithAnd() to arrayOf()
     }
 
     override fun isPaginationEnabled() = false

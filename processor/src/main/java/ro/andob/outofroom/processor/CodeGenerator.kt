@@ -52,13 +52,13 @@ ${insertDataExtensionMethods.map { extensionMethod ->
     @Override
     public Object convert(Object object)
     {
-        if (object==null)
+        if (object == null)
             return object;
 
-        InsertDataExtensionFunction<Object> extensionFunction=extensionFunctions.get(object.getClass());
-        if (extensionFunction!=null)
+        InsertDataExtensionFunction<Object> extensionFunction = extensionFunctions.get(object.getClass());
+        if (extensionFunction != null)
         {
-            InterceptingInsertData insertData=new InterceptingInsertData();
+            InterceptingInsertData insertData = new InterceptingInsertData();
             extensionFunction.putObject(insertData, dummyColumn, object);
             return insertData.interceptedValue;
         }
@@ -81,43 +81,43 @@ ${insertDataExtensionMethods.map { extensionMethod ->
         @Override
         public void putBoolean(Column column, Boolean value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
 
         @Override
         public void putDouble(Column column, Double value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
 
         @Override
         public void putFloat(Column column, Float value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
 
         @Override
         public void putInt(Column column, Integer value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
 
         @Override
         public void putLong(Column column, Long value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
 
         @Override
         public void putString(Column column, String value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
         
         @Override
         public void putBytes(Column column, byte[] value)
         {
-            interceptedValue=value;
+            interceptedValue = value;
         }
     }
 }

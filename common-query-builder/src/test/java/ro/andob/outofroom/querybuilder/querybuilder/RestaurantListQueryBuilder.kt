@@ -13,22 +13,31 @@ class RestaurantListQueryBuilder : QueryBuilder<RestaurantFilter>
 
     override fun table() = FS.Restaurant.asTable()
 
-    override fun where(conditions : QueryWhereConditions) : String
+    override fun where(conditions : QueryWhereConditions) : Pair<String, Array<Any?>>
     {
+        val args=mutableListOf<Any?>()
+
         if (filter.search!=null)
             conditions.addSearchConditions(filter.search, columns = arrayOf(FS.Restaurant_name.asColumn()))
 
         if (filter.rating!=null)
-            conditions.add("${FS.Restaurant_rating} = ${filter.rating}")
+        {
+            conditions.add("${FS.Restaurant_rating} = ?")
+            args.add(filter.rating)
+        }
 
         if (filter.boundingBox!=null)
         {
-            conditions.add("${FS.Restaurant_latitude}  <= ${filter.boundingBox?.northWestLat}")
-            conditions.add("${FS.Restaurant_latitude}  >= ${filter.boundingBox?.southEastLat}")
-            conditions.add("${FS.Restaurant_longitude} >= ${filter.boundingBox?.northWestLng}")
-            conditions.add("${FS.Restaurant_longitude} <= ${filter.boundingBox?.southEastLng}")
+            conditions.add("${FS.Restaurant_latitude}  <= ?")
+            args.add(filter.boundingBox?.northWestLat)
+            conditions.add("${FS.Restaurant_latitude}  >= ?")
+            args.add(filter.boundingBox?.southEastLat)
+            conditions.add("${FS.Restaurant_longitude} >= ?")
+            args.add(filter.boundingBox?.northWestLng)
+            conditions.add("${FS.Restaurant_longitude} <= ?")
+            args.add(filter.boundingBox?.southEastLng)
         }
 
-        return conditions.mergeWithAnd()
+        return conditions.mergeWithAnd() to args.toTypedArray()
     }
 }

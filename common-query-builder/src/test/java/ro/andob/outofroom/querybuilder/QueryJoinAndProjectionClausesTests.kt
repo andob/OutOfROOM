@@ -28,7 +28,7 @@ class QueryJoinAndProjectionClausesTests
                 "inner join ${FS.City} on ${FS.Restaurant}.${FS.Restaurant_cityId} = ${FS.City}.${FS.City_id} "+
                 "left outer join ${FS.Country} on ${FS.City}.${FS.City_countryId} = ${FS.Country}.${FS.Country_id}"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -53,7 +53,7 @@ class QueryJoinAndProjectionClausesTests
                 "right outer join ${FS.City} on ${FS.Restaurant}.${FS.Restaurant_cityId} = ${FS.City}.${FS.City_id} "+
                 "cross join ${FS.Country} on ${FS.City}.${FS.City_countryId} = ${FS.Country}.${FS.Country_id}"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -94,7 +94,7 @@ class QueryJoinAndProjectionClausesTests
                 "full outer join ${FS.City} on ${FS.Restaurant}.${FS.Restaurant_cityId} = ${FS.City}.${FS.City_id} "+
                 "full outer join ${FS.Country} on ${FS.City}.${FS.City_countryId} = ${FS.Country}.${FS.Country_id}"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -106,6 +106,6 @@ class QueryJoinAndProjectionClausesTests
         val resultQuery="select ${projectionClauses.merge()} from ${FS.Restaurant} ${joinClauses.merge()?:""}".removeUnnecessarySpaces()
         val expectedQuery="select * from ${FS.Restaurant}"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 }

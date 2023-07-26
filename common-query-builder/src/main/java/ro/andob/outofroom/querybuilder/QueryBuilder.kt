@@ -10,41 +10,40 @@ abstract class QueryBuilder<FILTER>
     private val page : Page = Page(),
 )
 {
-    fun build() : String
+    fun build() : Pair<String, Array<Any?>>
     {
-        var sql="select ${projection(QueryProjectionClauses())}"
-        sql+=" from ${table()} "
+        val sql = StringBuilder("select ${projection(QueryProjectionClauses())}")
+        sql.append(" from ${table()} ")
 
         join(QueryJoinClauses())?.let { join ->
             if (join.isNotEmpty())
-                sql+=join
+                sql.append(join)
         }
 
-        where(QueryWhereConditions())?.let { where ->
-            if (where.isNotEmpty())
-                sql+=" where $where "
-        }
+        val (where, args) = where(QueryWhereConditions())
+        if (where.isNotEmpty())
+            sql.append(" where $where ")
 
         orderBy()?.let { order ->
             if (order.isNotEmpty())
-                sql+=" order by $order "
+                sql.append(" order by $order ")
         }
 
         if (isPaginationEnabled())
         {
             if (page.limit!=null)
-                sql+=" limit ${page.limit} "
+                sql.append(" limit ${page.limit} ")
             if (page.offset!=null)
-                sql+=" offset ${page.offset} "
+                sql.append(" offset ${page.offset} ")
         }
 
-        return sql
+        return sql.toString() to args
     }
 
-    abstract fun table() : Table?
+    abstract fun table() : Table
     open fun projection(clauses : QueryProjectionClauses) : String = "*"
     open fun join(clauses : QueryJoinClauses) : String? = null
-    abstract fun where(conditions : QueryWhereConditions) : String?
+    abstract fun where(conditions : QueryWhereConditions) : Pair<String, Array<Any?>>
     open fun orderBy() : String? = null
     open fun isPaginationEnabled() : Boolean = QueryBuilderDefaults.isPaginationEnabled
     open fun getQueryArgumentConverter() = QueryArgumentConverter { a -> a }

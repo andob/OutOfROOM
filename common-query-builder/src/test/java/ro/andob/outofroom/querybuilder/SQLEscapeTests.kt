@@ -12,7 +12,7 @@ class SQLEscapeTests
         object : QueryBuilder<Unit>(filter = Unit, page = Page(limit = 100, offset = 0))
         {
             override fun table() = "".asTable()
-            override fun where(conditions : QueryWhereConditions) = "1=1"
+            override fun where(conditions : QueryWhereConditions) = "1=1" to arrayOf<Any?>()
         }.let(toRun)
 
     @Test
@@ -23,7 +23,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} = 'stuff'"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -35,7 +35,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} = 'st''; drop database db;'"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -47,7 +47,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${stringArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in ('some', 'strings')"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -59,7 +59,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${stringListToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in ('some', 'strings')"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -71,7 +71,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1, 2)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -83,7 +83,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1, 2)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -95,7 +95,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${floatArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1.1, 2.2)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -107,7 +107,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${doubleArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1.1, 2.2)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -119,7 +119,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${numberArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -131,7 +131,7 @@ class SQLEscapeTests
             val resultCondition="where ${FS.Restaurant_name} in ${numberListToEscape.sqlEscaped}".removeUnnecessarySpaces()
             val expectedCondition="where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -147,7 +147,7 @@ class SQLEscapeTests
             }
             catch (ex : Exception)
             {
-                assertEquals(ex.message, "Cannot escape ${Restaurant::class.java.name}")
+                assertEquals("Cannot escape ${Restaurant::class.java.name}", ex.message)
             }
         }
     }
@@ -164,7 +164,7 @@ class SQLEscapeTests
             }
             catch (ex : Exception)
             {
-                assertEquals(ex.message, "Cannot escape ${Restaurant::class.java.name}")
+                assertEquals("Cannot escape ${Restaurant::class.java.name}", ex.message)
             }
         }
     }
@@ -181,7 +181,7 @@ class SQLEscapeTests
             }
             catch (ex : Exception)
             {
-                assertEquals(ex.message, "Cannot escape empty collection")
+                assertEquals("Cannot escape empty collection", ex.message)
             }
         }
     }
@@ -198,7 +198,7 @@ class SQLEscapeTests
             }
             catch (ex : Exception)
             {
-                assertEquals(ex.message, "Cannot escape empty collection")
+                assertEquals("Cannot escape empty collection", ex.message)
             }
         }
     }
@@ -210,7 +210,7 @@ class SQLEscapeTests
             val resultCondition="where someFlag = ${true.sqlEscaped}"
             val expectedCondition="where someFlag = 1"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 
@@ -221,7 +221,7 @@ class SQLEscapeTests
             val resultCondition="where someFlag = ${false.sqlEscaped}"
             val expectedCondition="where someFlag = 0"
 
-            assertEquals(resultCondition, expectedCondition)
+            assertEquals(expectedCondition, resultCondition)
         }
     }
 }

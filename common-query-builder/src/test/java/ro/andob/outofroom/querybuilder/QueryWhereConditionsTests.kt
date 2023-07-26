@@ -19,7 +19,7 @@ class QueryWhereConditionsTests
         val expectedQuery="select * from ${FS.Restaurant} "+
                 "where ${FS.Restaurant_id} = $restaurantId"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -41,7 +41,7 @@ class QueryWhereConditionsTests
                 "and ${FS.Restaurant_id} = $restaurantId "+
                 "and ${FS.Restaurant_rating} = $restaurantRating"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -65,7 +65,7 @@ class QueryWhereConditionsTests
                 ") or ${FS.Restaurant_id} = $restaurantId "+
                 "or ${FS.Restaurant_rating} = $restaurantRating"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -104,7 +104,7 @@ class QueryWhereConditionsTests
                     "and ${FS.Restaurant_rating} = $secondRestaurantRating"+
                 ")"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 
     @Test
@@ -115,6 +115,6 @@ class QueryWhereConditionsTests
         val resultQuery="select * from ${FS.Restaurant} where ${conditions.mergeWithAnd()}".removeUnnecessarySpaces()
         val expectedQuery="select * from ${FS.Restaurant} where 1==1"
 
-        assertEquals(resultQuery, expectedQuery)
+        assertEquals(expectedQuery, resultQuery)
     }
 }

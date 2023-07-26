@@ -20,8 +20,9 @@ class NoteDao
 {
     fun getAll(noteFilter : NoteFilter) : List<Note>
     {
+        val (sql, args) = NoteListQueryBuilder(noteFilter, schema).build()
         return entityManager.query(
-            sql = NoteListQueryBuilder(noteFilter, schema).build(),
+            sql = sql, arguments = args,
             adapter = ::queryResultToNote)
     }
 
