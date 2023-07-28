@@ -1,5 +1,6 @@
 package ro.andob.outofroom;
 
+import org.jetbrains.annotations.Nullable;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +9,7 @@ import java.lang.annotation.Target;
 
 public interface QueryArgumentConverter
 {
-    Object convert(Object object);
+    @Nullable Object convert(@Nullable Object object);
 
     @Documented
     @Target(ElementType.TYPE)

@@ -1,7 +1,5 @@
 package ro.andob.outofroom
 
-import ro.andob.outofroom.optional.toLong
-
 class InsertDataImpl
 (
     private val statement : IStatement,

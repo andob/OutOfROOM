@@ -1,8 +1,6 @@
 package ro.andob.outofroom
 
-import java.io.Closeable
-
-interface ICursor : Closeable
+interface ICursor
 {
     fun getColumnIndexOrThrow(name : String) : Int
 
@@ -15,4 +13,6 @@ interface ICursor : Closeable
 
     fun moveToFirst() : Boolean
     fun moveToNext() : Boolean
+
+    fun close()
 }

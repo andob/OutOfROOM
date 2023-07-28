@@ -1,7 +1,5 @@
 package ro.andob.outofroom
 
-import ro.andob.outofroom.optional.toInt
-
 class QueryResult
 (
     private val cursor : ICursor

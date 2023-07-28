@@ -1,11 +1,12 @@
 package ro.andob.outofroom
 
+import java.io.Closeable
 import java.sql.ResultSet
 
 class JDBCResultSetWrapper
 (
     private val resultSet : ResultSet
-) : ICursor
+) : ICursor, Closeable
 {
     override fun getColumnIndexOrThrow(name : String) : Int = resultSet.findColumn(name)-1
 

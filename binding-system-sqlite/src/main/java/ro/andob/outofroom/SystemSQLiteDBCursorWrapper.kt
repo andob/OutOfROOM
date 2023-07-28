@@ -1,11 +1,12 @@
 package ro.andob.outofroom
 
 import android.database.Cursor
+import java.io.Closeable
 
 class SystemSQLiteDBCursorWrapper
 (
     private val delegate : Cursor
-) : ICursor
+) : ICursor, Closeable
 {
     override fun getColumnIndexOrThrow(name : String) : Int = delegate.getColumnIndexOrThrow(name)
 

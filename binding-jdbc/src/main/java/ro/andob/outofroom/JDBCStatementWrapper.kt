@@ -1,12 +1,13 @@
 package ro.andob.outofroom
 
+import java.io.Closeable
 import java.sql.PreparedStatement
 import java.sql.Types
 
 class JDBCStatementWrapper
 (
     private val statement : PreparedStatement
-) : IStatement
+) : IStatement, Closeable
 {
     override fun bindString(index : Int, value : String) = statement.setString(index, value)
     override fun bindLong(index : Int, value : Long) = statement.setLong(index, value)

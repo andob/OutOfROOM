@@ -1,11 +1,12 @@
 package ro.andob.outofroom
 
 import android.database.sqlite.SQLiteStatement
+import java.io.Closeable
 
 class SystemSQLiteDBStatementWrapper
 (
     private val delegate : SQLiteStatement
-) : IStatement
+) : IStatement, Closeable
 {
     override fun bindString(index : Int, value : String) = delegate.bindString(index, value)
     override fun bindLong(index : Int, value : Long) = delegate.bindLong(index, value)
