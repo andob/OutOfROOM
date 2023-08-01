@@ -1,8 +1,8 @@
 package ro.andob.outofroom
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class CreateStatementsTests
 {

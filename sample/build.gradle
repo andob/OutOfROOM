@@ -45,12 +45,12 @@ dependencies {
     //appcompat
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 
     //requery latest sqlite
-    implementation 'com.github.requery:sqlite-android:3.39.2'
+    implementation 'com.github.requery:sqlite-android:3.42.0'
     implementation 'androidx.sqlite:sqlite-ktx:2.3.1'
 
     //material dialogs
