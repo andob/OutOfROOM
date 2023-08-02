@@ -383,29 +383,29 @@ val noteCount = NotesDatabase().noteDao().count()
 To use this library with system SQLite (the SQLite library bundled in the Android operating system), just import relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.4'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:...'
 ```
 
-```
+```kotlin
 import ro.andob.outofroom.system_sqlite.toEntityManager
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class NotesDatabaseOpenHelper { ... }
+object NotesDatabase { ... }
 ```
 
 To use this library with the latest SQLite version provided by requery, just import and use relevant components:
 
 ```
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.4'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:...'
 ```
 
-```
+```kotlin
 import ro.andob.outofroom.latest_sqlite.toEntityManager
 import io.requery.android.database.sqlite.SQLiteDatabase
 import io.requery.android.database.sqlite.SQLiteOpenHelper
 
-class NotesDatabaseOpenHelper { ... }
+object NotesDatabase { ... }
 ```
 
 By using the requery SQLite compatibility library, a version of the SQLite library will be bundled with your app. This will yield in larger APK size. Advantages of using latest SQLite: speed, security fixes, all your app users will use the exact same SQLite version across a wide range of devices.
