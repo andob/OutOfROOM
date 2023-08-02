@@ -27,10 +27,9 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.7'
-    implementation 'ro.andob.outofroom:common-dml:1.2.7'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.7'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.2.7'
+    implementation 'ro.andob.outofroom:common-ddl:1.3.1'
+    implementation 'ro.andob.outofroom:common-dml:1.3.1'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.3.1'
 }
 ```
 
@@ -38,12 +37,11 @@ To use with [the latest SQLite version provided by requery](https://github.com/r
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.2.7'
-    implementation 'ro.andob.outofroom:common-dml:1.2.7'
-    implementation 'ro.andob.outofroom:common-query-builder:1.2.7'
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.7'
-    implementation 'com.github.requery:sqlite-android:3.39.2'
-    implementation 'androidx.sqlite:sqlite-ktx:2.2.0'
+    implementation 'ro.andob.outofroom:common-ddl:1.3.1'
+    implementation 'ro.andob.outofroom:common-dml:1.3.1'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.3.1'
+    implementation 'com.github.requery:sqlite-android:3.42.0'
+    implementation 'androidx.sqlite:sqlite-ktx:2.3.1'
 }
 ```
 
@@ -380,62 +378,6 @@ val someNotes = NotesDatabase.noteDao().getByIds(listOf(note.id))
 val noteCount = NotesDatabase().noteDao().count()
 ```
 
-### DAO - using the query builder
-
-This library also contains a "Query Builder", a clone of my library [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao). With it, you can convert filter objects into select SQL commands. Please read the tutorial from the [ROOM-Dynamic-Dao](https://github.com/andob/ROOM-Dynamic-Dao) documentation. The syntax is very similar:
-
-```kotlin
-data class NoteFilter(val searchTerm : String?)
-```
-
-```kotlin
-class NoteDao
-(
-    private val schema : NotesDatabaseSchema,
-    private val entityManager : EntityManager,
-)
-{
-    fun getFiltered(noteFilter : NoteFilter) : List<Note>
-    {
-        return entityManager.query(
-            sql = NoteQueryBuilder(schema, noteFilter).build(),
-            adapter = ::parseQueryResult)
-    }
-
-    private fun populateInsertData(insertData : InsertData, note : Note) ...
-    private fun parseQueryResult(queryResult : QueryResult) : Note ...
-}
-```
-
-```kotlin
-class NoteQueryBuilder
-(
-    private val schema : NotesDatabaseSchema,
-    filter : NoteFilter,
-) : QueryBuilder<NoteFilter>(filter)
-{
-    override fun table() = schema.noteTable
-
-    override fun where(conditions : QueryWhereConditions) : String
-    {
-        if (filter.searchTerm != null)
-        {
-            conditions.addSearchConditions(
-                search = filter.searchTerm, columns = arrayOf(
-                    schema.noteTable.title,
-                    schema.noteTable.contents,
-                ))
-        }
-
-        return conditions.mergeWithAnd()
-    }
-}
-```
-
-```kotlin
-val notes = NotesDatabase.noteDao().getFiltered(NoteFilter(search = "test", limit = 100, offset = 0))
-```
-
 ### Using system SQLite vs Latest SQLite from Requery
 
 To use this library with system SQLite (the SQLite library bundled in the Android operating system), just import relevant components:
@@ -446,14 +388,13 @@ To use this library with system SQLite (the SQLite library bundled in the Androi
 
 ```
 import ro.andob.outofroom.system_sqlite.toEntityManager
-```
-
-```
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+
+class NotesDatabaseOpenHelper { ... }
 ```
 
-To use this library with the latest SQLite version provided by requery, just import relevant components:
+To use this library with the latest SQLite version provided by requery, just import and use relevant components:
 
 ```
     implementation 'ro.andob.outofroom:binding-latest-sqlite:1.2.4'
@@ -461,11 +402,10 @@ To use this library with the latest SQLite version provided by requery, just imp
 
 ```
 import ro.andob.outofroom.latest_sqlite.toEntityManager
-```
-
-```
 import io.requery.android.database.sqlite.SQLiteDatabase
 import io.requery.android.database.sqlite.SQLiteOpenHelper
+
+class NotesDatabaseOpenHelper { ... }
 ```
 
 By using the requery SQLite compatibility library, a version of the SQLite library will be bundled with your app. This will yield in larger APK size. Advantages of using latest SQLite: speed, security fixes, all your app users will use the exact same SQLite version across a wide range of devices.
