@@ -11,12 +11,12 @@ class RestaurantJoinListQueryBuilderTests
     @Test
     fun testJoinsAndProjections()
     {
-        val filter=RestaurantFilter()
-        val page=Page(limit = 100, offset = 1)
+        val filter = RestaurantFilter()
+        val page = Page(limit = 100, offset = 1)
 
-        val queryBuilder=RestaurantJoinListQueryBuilder(filter, page)
-        val resultQuery=queryBuilder.build().first.removeUnnecessarySpaces()
-        val expectedQuery="select ${FS.Restaurant}.*, "+
+        val queryBuilder = RestaurantJoinListQueryBuilder(filter, page)
+        val resultQuery = queryBuilder.build().first.removeUnnecessarySpaces()
+        val expectedQuery = "select ${FS.Restaurant}.*, "+
                     "${FS.City}.${FS.City_name} as ${FS.RestaurantJoin_cityName}, "+
                     "${FS.Country}.${FS.Country_name} as ${FS.RestaurantJoin_countryName} "+
                 "from ${FS.Restaurant} "+
@@ -34,8 +34,8 @@ class RestaurantJoinListQueryBuilderTests
     @Test
     fun testJoinsAndProjectionsWithModifiedDefaultPaginationBehavior()
     {
-        QueryBuilderDefaults.isPaginationEnabled=true
+        QueryBuilderDefaults.isPaginationEnabled = true
         testJoinsAndProjections()
-        QueryBuilderDefaults.isPaginationEnabled=false
+        QueryBuilderDefaults.isPaginationEnabled = false
     }
 }

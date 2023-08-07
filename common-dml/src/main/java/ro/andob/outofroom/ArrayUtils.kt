@@ -8,11 +8,11 @@ object ArrayUtils
         if (objects==null)
             return arrayOf()
 
-        val strings=Array(size = objects.size, init = { "" })
+        val strings = Array(size = objects.size, init = { "" })
         for (i in objects.indices)
         {
             objects[i]?.let(argumentConverter::convert)
-                ?.let { convertedObject -> strings[i]=convertedObject.toString() }
+                ?.let { convertedObject -> strings[i] = convertedObject.toString() }
         }
 
         return strings
@@ -24,7 +24,7 @@ object ArrayUtils
         if (times<=1)
             return "?"
 
-        val builder=StringBuilder()
+        val builder = StringBuilder()
         for (i in 0 until times)
         {
             builder.append('?')

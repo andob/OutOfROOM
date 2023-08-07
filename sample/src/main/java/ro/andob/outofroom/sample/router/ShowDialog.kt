@@ -22,7 +22,7 @@ object ShowDialog
             title(text = title)
             listItems(items = items.map { it.toString() },
                 selection = { dialog, index, text ->
-                    if (index>=0&&index<items.size)
+                    if (index>=0 && index<items.size)
                         items[index].onClickListener?.invoke()
                 })
         }
@@ -35,7 +35,7 @@ object ShowDialog
                        yesButtonText : String = context.getString(R.string.yes),
                        yesAction : (() -> (Unit))?,
                        noButtonText : String = context.getString(R.string.no),
-                       noAction: (() -> (Unit))? = null,
+                       noAction : (() -> (Unit))? = null,
                        shouldCallNoActionOnDismiss : Boolean = true)
     {
         MaterialDialog(context).show {
@@ -59,11 +59,11 @@ object ShowDialog
                   contents : String = "",
                   okButtonClickedListener : (String) -> (Unit))
     {
-        val okButtonCallback={ dialog : MaterialDialog ->
+        val okButtonCallback = { dialog : MaterialDialog ->
             okButtonClickedListener(dialog.getInputField().text.toString().trim())
         }
 
-        val dialog=MaterialDialog(context).show {
+        val dialog = MaterialDialog(context).show {
             title(text = title)
             input(inputType = inputType, hint = hint, prefill = contents, allowEmpty = false)
             negativeButton(text = context.resources.getString(R.string.cancel))

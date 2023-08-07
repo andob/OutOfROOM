@@ -125,8 +125,8 @@ ${insertDataExtensionMethods.map { extensionMethod ->
 
         override fun generate()
         {
-            val sourceFile=filer.createSourceFile(outputClassName)
-            val sourceCode=getSourceCode()
+            val sourceFile = filer.createSourceFile(outputClassName)
+            val sourceCode = getSourceCode()
 
             sourceFile.openWriter().use { it.write(sourceCode) }
         }

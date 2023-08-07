@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.michaelflisar.bundlebuilder.Arg
 import com.michaelflisar.bundlebuilder.BundleBuilder
-import org.koin.android.ext.android.inject
 import ro.andob.outofroom.sample.R
 import ro.andob.outofroom.sample.database.SampleDatabase
 import ro.andob.outofroom.sample.databinding.ActivityNoteDetailsBinding
@@ -23,8 +22,6 @@ class NoteDetailsActivity : AppCompatActivity()
     @AutoViewBinding
     lateinit var binding : ActivityNoteDetailsBinding
 
-    private val database : SampleDatabase by inject()
-
     override fun onCreate(savedInstanceState : Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -33,9 +30,10 @@ class NoteDetailsActivity : AppCompatActivity()
         NoteDetailsActivityBundleBuilder.inject(intent.extras, this)
 
         //for the sake of simplicity, we will query the database on the UI thread
-        val note=database.noteDao().getById(noteId)!!
-        binding.titleLabel.text=note.title
-        binding.messageLabel.text=note.message
+        val database = SampleDatabase.instance
+        val note = database.noteDao().getById(noteId)!!
+        binding.titleLabel.text = note.title
+        binding.messageLabel.text = note.message
 
         binding.editButton.setOnClickListener {
             showInputNoteForEditDialog(note) { newNote ->

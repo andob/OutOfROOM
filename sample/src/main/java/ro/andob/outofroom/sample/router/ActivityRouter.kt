@@ -11,7 +11,7 @@ object ActivityRouter
 {
     fun startNoteListActivity(from : Context?)
     {
-        val intent=Intent(from, NoteListActivity::class.java)
+        val intent = Intent(from, NoteListActivity::class.java)
         from!!.startActivity(intent)
     }
 

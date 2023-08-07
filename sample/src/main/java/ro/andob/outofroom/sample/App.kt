@@ -17,7 +17,7 @@ class App : Application()
     {
         super.onCreate()
 
-        context=this
+        context = this
 
         CellViewGlobalEvents.setOnCellViewInflatedListener { cellView ->
             ReflectiveViewBindingFieldSetter.setup(cellView)

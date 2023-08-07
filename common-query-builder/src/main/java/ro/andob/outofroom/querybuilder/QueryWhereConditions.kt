@@ -12,17 +12,17 @@ class QueryWhereConditions : LinkedList<String>()
 
     fun addSearchConditions(searchTerms : Set<String>, columns : Array<Column>)
     {
-        if (searchTerms.size==1&&columns.size==1)
+        if (searchTerms.size==1 && columns.size==1)
         {
-            val likeArgument="'%${SQLEscape.escapeAndUnquoteString(searchTerms.first())}%'"
+            val likeArgument = "'%${SQLEscape.escapeAndUnquoteString(searchTerms.first())}%'"
             add(" ${columns[0]} like $likeArgument ")
         }
         else
         {
-            val subcondition=QueryWhereConditions()
+            val subcondition = QueryWhereConditions()
             for (searchTerm in searchTerms)
             {
-                val likeArgument="'%${SQLEscape.escapeAndUnquoteString(searchTerm)}%'"
+                val likeArgument = "'%${SQLEscape.escapeAndUnquoteString(searchTerm)}%'"
                 for (column in columns)
                     subcondition.add(" $column like $likeArgument ")
             }

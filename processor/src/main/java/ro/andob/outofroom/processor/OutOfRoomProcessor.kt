@@ -22,10 +22,10 @@ class OutOfRoomProcessor : AbstractProcessor()
     {
         super.init(processingEnvironment)
 
-        this.elementUtils=processingEnvironment.elementUtils
-        this.typeUtils=processingEnvironment.typeUtils
-        this.filer=processingEnvironment.filer
-        this.messager=processingEnvironment.messager
+        this.elementUtils = processingEnvironment.elementUtils
+        this.typeUtils = processingEnvironment.typeUtils
+        this.filer = processingEnvironment.filer
+        this.messager = processingEnvironment.messager
     }
 
     override fun getSupportedAnnotationTypes() = setOf(QueryArgumentConverter.Generator::class.java.canonicalName)
@@ -35,32 +35,32 @@ class OutOfRoomProcessor : AbstractProcessor()
     {
         try
         {
-            val codeGenerators=mutableListOf<CodeGenerator>()
+            val codeGenerators = mutableListOf<CodeGenerator>()
 
             for (annotatedElement in roundEnvironment.getElementsAnnotatedWith(QueryArgumentConverter.Generator::class.java))
             {
                 if (annotatedElement.kind!=ElementKind.CLASS)
                     throw ProcessingException("Only classes can be annotated with ${QueryArgumentConverter.Generator::class.java}", annotatedElement);
 
-                val insertDataExtensionMethodsParentElement=elementUtils.getElementFromKClass(typeUtils, annotatedElement.getAnnotation(QueryArgumentConverter.Generator::class.java)::insertDataExtensionMethodsParentClass)?:annotatedElement
-                val implementationClassName="${elementUtils.getPackageOf(insertDataExtensionMethodsParentElement)}.${QueryArgumentConverter::class.java.simpleName}Impl"
-                val insertDataExtensionMethods=mutableListOf<ExecutableElement>()
+                val insertDataExtensionMethodsParentElement = elementUtils.getElementFromKClass(typeUtils, annotatedElement.getAnnotation(QueryArgumentConverter.Generator::class.java)::insertDataExtensionMethodsParentClass)?:annotatedElement
+                val implementationClassName = "${elementUtils.getPackageOf(insertDataExtensionMethodsParentElement)}.${QueryArgumentConverter::class.java.simpleName}Impl"
+                val insertDataExtensionMethods = mutableListOf<ExecutableElement>()
 
                 for (enclosedElement in insertDataExtensionMethodsParentElement.enclosedElements)
                 {
                     if (enclosedElement.kind==ElementKind.METHOD)
                     {
-                        val isAbstract=enclosedElement.modifiers.any { modifier -> modifier==Modifier.ABSTRACT }
-                        val isPublic=enclosedElement.modifiers.any { modifier -> modifier==Modifier.PUBLIC }
-                        val parameters=(enclosedElement as ExecutableElement).parameters
-                        if (!isAbstract&&isPublic&&parameters.size==3)
+                        val isAbstract = enclosedElement.modifiers.any { modifier -> modifier==Modifier.ABSTRACT }
+                        val isPublic = enclosedElement.modifiers.any { modifier -> modifier==Modifier.PUBLIC }
+                        val parameters = (enclosedElement as ExecutableElement).parameters
+                        if (!isAbstract && isPublic && parameters.size==3)
                         {
                             if (parameters[0].asType().toString()==InsertData::class.java.name
-                                &&parameters[1].asType().toString()==Column::class.java.name
-                                &&!parameters[2].asType().toString().startsWith("java.")
-                                &&!parameters[2].asType().toString().startsWith("javax.")
-                                &&!parameters[2].asType().toString().startsWith("android.")
-                                &&!parameters[2].asType().toString().startsWith("androidx."))
+                                && parameters[1].asType().toString()==Column::class.java.name
+                                && !parameters[2].asType().toString().startsWith("java.")
+                                && !parameters[2].asType().toString().startsWith("javax.")
+                                && !parameters[2].asType().toString().startsWith("android.")
+                                && !parameters[2].asType().toString().startsWith("androidx."))
                                 insertDataExtensionMethods.add(enclosedElement)
                         }
                     }

@@ -12,7 +12,7 @@ class RestaurantJoinListQueryBuilder : QueryBuilder<RestaurantFilter>
 
     override fun where(conditions : QueryWhereConditions) = "1=1" to arrayOf<Any?>()
 
-    override fun projection(clauses : QueryProjectionClauses): String
+    override fun projection(clauses : QueryProjectionClauses) : String
     {
         clauses.addAllFieldsFromTable(FS.Restaurant.asTable())
 

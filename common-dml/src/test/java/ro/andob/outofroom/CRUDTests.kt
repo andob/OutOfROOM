@@ -29,7 +29,7 @@ class CRUDTests
         TestDatabase.noteDao.deleteAll()
         assert(TestDatabase.noteDao.getAll().isEmpty())
 
-        val note1=randomizer.nextNote()
+        val note1 = randomizer.nextNote()
         TestDatabase.noteDao.insert(note1)
         assertEquals(1, TestDatabase.noteDao.getAll().size)
         assertEquals(note1, TestDatabase.noteDao.getAll().first())
@@ -37,7 +37,7 @@ class CRUDTests
         try { TestDatabase.noteDao.insert(note1); fail() }
         catch (ex : Exception) { ex.printStackTrace() }
 
-        val note2=randomizer.nextNote()
+        val note2 = randomizer.nextNote()
         TestDatabase.noteDao.insert(note2)
         assertEquals(2, TestDatabase.noteDao.getAll().size)
         assertEquals(note1, TestDatabase.noteDao.getAll().find { it.id==note1.id }!!)
@@ -50,15 +50,15 @@ class CRUDTests
         TestDatabase.noteDao.deleteAll()
         assert(TestDatabase.noteDao.getAll().isEmpty())
 
-        val notes=(1..100).map { randomizer.nextNote() }
+        val notes = (1..100).map { randomizer.nextNote() }
         notes.forEach { note -> TestDatabase.noteDao.insert(note) }
 
         assertEquals(100, TestDatabase.noteDao.getAll().size)
         assertEquals(notes, TestDatabase.noteDao.getAll())
 
         repeat(times = 100) {
-            val note=notes.random()
-            val noteFromDB=TestDatabase.noteDao.getById(note.id)
+            val note = notes.random()
+            val noteFromDB = TestDatabase.noteDao.getById(note.id)
             assertEquals(note, noteFromDB)
         }
     }
@@ -69,12 +69,12 @@ class CRUDTests
         TestDatabase.noteDao.deleteAll()
         assert(TestDatabase.noteDao.getAll().isEmpty())
 
-        val note1=randomizer.nextNote()
+        val note1 = randomizer.nextNote()
         TestDatabase.noteDao.insert(note1)
         assertEquals(1, TestDatabase.noteDao.getAll().size)
         assertEquals(note1, TestDatabase.noteDao.getAll().first())
 
-        val note2=note1.copy(title = randomizer.nextString(), message = randomizer.nextString())
+        val note2 = note1.copy(title = randomizer.nextString(), message = randomizer.nextString())
         TestDatabase.noteDao.update(note2)
         assertEquals(1, TestDatabase.noteDao.getAll().size)
         assertEquals(note2, TestDatabase.noteDao.getAll().first())
@@ -86,7 +86,7 @@ class CRUDTests
         TestDatabase.noteDao.deleteAll()
         assert(TestDatabase.noteDao.getAll().isEmpty())
 
-        val note=randomizer.nextNote()
+        val note = randomizer.nextNote()
         TestDatabase.noteDao.insert(note)
         assertEquals(1, TestDatabase.noteDao.getAll().size)
         assertEquals(note, TestDatabase.noteDao.getAll().first())

@@ -4,11 +4,11 @@ apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'ro.andob.outofroom.sample'
-    compileSdkVersion 33
+    compileSdk 33
     defaultConfig {
         applicationId "ro.andob.outofroom.sample"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -64,10 +64,6 @@ dependencies {
     //bundle args
     implementation 'ro.andob.bundleargs:bundleargs-annotation:2.2.0'
     kapt 'ro.andob.bundleargs:bundleargs-processor:2.2.0'
-
-    //koin
-    implementation "io.insert-koin:koin-core:3.2.2"
-    implementation "io.insert-koin:koin-android-ext:3.0.1"
 
     //out of room
     implementation project(":common-ddl")

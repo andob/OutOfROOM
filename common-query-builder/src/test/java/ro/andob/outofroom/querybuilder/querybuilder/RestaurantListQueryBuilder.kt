@@ -9,13 +9,13 @@ import ro.andob.outofroom.querybuilder.model.RestaurantFilter
 
 class RestaurantListQueryBuilder : QueryBuilder<RestaurantFilter>
 {
-    constructor(filter: RestaurantFilter) : super(filter)
+    constructor(filter : RestaurantFilter) : super(filter)
 
     override fun table() = FS.Restaurant.asTable()
 
     override fun where(conditions : QueryWhereConditions) : Pair<String, Array<Any?>>
     {
-        val args=mutableListOf<Any?>()
+        val args = mutableListOf<Any?>()
 
         if (filter.search!=null)
             conditions.addSearchConditions(filter.search, columns = arrayOf(FS.Restaurant_name.asColumn()))

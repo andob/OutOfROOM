@@ -11,7 +11,7 @@ abstract class Table
     {
         return this::class.java.declaredFields
             .filter { field -> field.type==Column::class.java }
-            .map { field -> field.also { it.isAccessible=true } }
+            .map { field -> field.also { it.isAccessible = true } }
             .map { field -> field.get(this) as Column }
     }
 
@@ -25,10 +25,10 @@ abstract class Table
         if (columns.isEmpty())
             throw RuntimeException("Please define columns for table \"$name\"!")
 
-        val definitions=mutableListOf<String>()
+        val definitions = mutableListOf<String>()
         definitions.addAll(columns.map { column ->
 
-            val tokens=mutableListOf<String>()
+            val tokens = mutableListOf<String>()
             tokens.add("`${column.name}`")
             tokens.add("${column.type}")
             if (column.notNull)
@@ -42,7 +42,7 @@ abstract class Table
             return@map tokens.joinToString(separator = " ")
         })
 
-        if (primaryKey!=null&&primaryKey !is PrimaryKey.AutoIncrement)
+        if (primaryKey!=null && primaryKey !is PrimaryKey.AutoIncrement)
             definitions.add(primaryKey.toString())
 
         for (foreignKey in foreignKeys)

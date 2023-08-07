@@ -34,7 +34,7 @@ open class Restaurant
 
     constructor()
 
-    constructor(id: Int, name: String, rating: Int, latitude: Double, longitude: Double)
+    constructor(id : Int, name : String, rating : Int, latitude : Double, longitude : Double)
     {
         this.id = id
         this.name = name

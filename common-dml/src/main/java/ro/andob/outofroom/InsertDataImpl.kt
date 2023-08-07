@@ -8,8 +8,8 @@ class InsertDataImpl
 {
     private fun index(column : Column) : Int
     {
-        val zeroBasedIndex=columns.indexOf(column)
-        if (zeroBasedIndex<0||zeroBasedIndex>=columns.size)
+        val zeroBasedIndex = columns.indexOf(column)
+        if (zeroBasedIndex<0 || zeroBasedIndex>=columns.size)
             throw RuntimeException("Invalid index for column: $column")
 
         return zeroBasedIndex+1
@@ -17,8 +17,8 @@ class InsertDataImpl
 
     override fun hasKey(column : Column) : Boolean
     {
-        val zeroBasedIndex=columns.indexOf(column)
-        return zeroBasedIndex>=0&&zeroBasedIndex<columns.size
+        val zeroBasedIndex = columns.indexOf(column)
+        return zeroBasedIndex>=0 && zeroBasedIndex<columns.size
     }
 
     override fun putString(column : Column, value : String?)

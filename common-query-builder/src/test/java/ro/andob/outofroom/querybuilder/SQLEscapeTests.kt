@@ -19,9 +19,9 @@ class SQLEscapeTests
     fun testStringEscape()
     {
         runOnQueryBuilder {
-            val stringToEscape="stuff"
-            val resultCondition="where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} = 'stuff'"
+            val stringToEscape = "stuff"
+            val resultCondition = "where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} = 'stuff'"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -31,9 +31,9 @@ class SQLEscapeTests
     fun testAnotherStringEscape()
     {
         runOnQueryBuilder {
-            val stringToEscape="st'; drop database db;"
-            val resultCondition="where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} = 'st''; drop database db;'"
+            val stringToEscape = "st'; drop database db;"
+            val resultCondition = "where ${FS.Restaurant_name} = ${stringToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} = 'st''; drop database db;'"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -43,9 +43,9 @@ class SQLEscapeTests
     fun testStringArrayEscape()
     {
         runOnQueryBuilder {
-            val stringArrayToEscape=arrayOf("some", "strings")
-            val resultCondition="where ${FS.Restaurant_name} in ${stringArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in ('some', 'strings')"
+            val stringArrayToEscape = arrayOf("some", "strings")
+            val resultCondition = "where ${FS.Restaurant_name} in ${stringArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in ('some', 'strings')"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -55,9 +55,9 @@ class SQLEscapeTests
     fun testStringListEscape()
     {
         runOnQueryBuilder {
-            val stringListToEscape=listOf("some", "strings")
-            val resultCondition="where ${FS.Restaurant_name} in ${stringListToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in ('some', 'strings')"
+            val stringListToEscape = listOf("some", "strings")
+            val resultCondition = "where ${FS.Restaurant_name} in ${stringListToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in ('some', 'strings')"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -67,9 +67,9 @@ class SQLEscapeTests
     fun testIntArrayEscape()
     {
         runOnQueryBuilder {
-            val intArrayToEscape=intArrayOf(1, 2)
-            val resultCondition="where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1, 2)"
+            val intArrayToEscape = intArrayOf(1, 2)
+            val resultCondition = "where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1, 2)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -79,9 +79,9 @@ class SQLEscapeTests
     fun testLongArrayEscape()
     {
         runOnQueryBuilder {
-            val intArrayToEscape=longArrayOf(1L, 2L)
-            val resultCondition="where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1, 2)"
+            val intArrayToEscape = longArrayOf(1L, 2L)
+            val resultCondition = "where ${FS.Restaurant_name} in ${intArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1, 2)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -91,9 +91,9 @@ class SQLEscapeTests
     fun testFloatArrayEscape()
     {
         runOnQueryBuilder {
-            val floatArrayToEscape=floatArrayOf(1.1f, 2.2f)
-            val resultCondition="where ${FS.Restaurant_name} in ${floatArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1.1, 2.2)"
+            val floatArrayToEscape = floatArrayOf(1.1f, 2.2f)
+            val resultCondition = "where ${FS.Restaurant_name} in ${floatArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1.1, 2.2)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -103,9 +103,9 @@ class SQLEscapeTests
     fun testDoubleArrayEscape()
     {
         runOnQueryBuilder {
-            val doubleArrayToEscape=doubleArrayOf(1.1, 2.2)
-            val resultCondition="where ${FS.Restaurant_name} in ${doubleArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1.1, 2.2)"
+            val doubleArrayToEscape = doubleArrayOf(1.1, 2.2)
+            val resultCondition = "where ${FS.Restaurant_name} in ${doubleArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1.1, 2.2)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -115,9 +115,9 @@ class SQLEscapeTests
     fun testNumberArrayEscape()
     {
         runOnQueryBuilder {
-            val numberArrayToEscape=arrayOf<Number>(1, 2L, 3.3f, 4.4)
-            val resultCondition="where ${FS.Restaurant_name} in ${numberArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
+            val numberArrayToEscape = arrayOf<Number>(1, 2L, 3.3f, 4.4)
+            val resultCondition = "where ${FS.Restaurant_name} in ${numberArrayToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -127,9 +127,9 @@ class SQLEscapeTests
     fun testNumberListEscape()
     {
         runOnQueryBuilder {
-            val numberListToEscape=listOf<Number>(1, 2L, 3.3f, 4.4)
-            val resultCondition="where ${FS.Restaurant_name} in ${numberListToEscape.sqlEscaped}".removeUnnecessarySpaces()
-            val expectedCondition="where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
+            val numberListToEscape = listOf<Number>(1, 2L, 3.3f, 4.4)
+            val resultCondition = "where ${FS.Restaurant_name} in ${numberListToEscape.sqlEscaped}".removeUnnecessarySpaces()
+            val expectedCondition = "where ${FS.Restaurant_name} in (1, 2, 3.3, 4.4)"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -141,7 +141,7 @@ class SQLEscapeTests
         runOnQueryBuilder {
             try
             {
-                val restaurantArrayToEscape=arrayOf(Restaurant())
+                val restaurantArrayToEscape = arrayOf(Restaurant())
                 restaurantArrayToEscape.sqlEscaped
                 fail()
             }
@@ -158,7 +158,7 @@ class SQLEscapeTests
         runOnQueryBuilder {
             try
             {
-                val restaurantListToEscape=listOf(Restaurant())
+                val restaurantListToEscape = listOf(Restaurant())
                 restaurantListToEscape.sqlEscaped
                 fail()
             }
@@ -175,7 +175,7 @@ class SQLEscapeTests
         runOnQueryBuilder {
             try
             {
-                val emptyArrayToEscape=arrayOf<Restaurant>()
+                val emptyArrayToEscape = arrayOf<Restaurant>()
                 emptyArrayToEscape.sqlEscaped
                 fail()
             }
@@ -192,7 +192,7 @@ class SQLEscapeTests
         runOnQueryBuilder {
             try
             {
-                val emptyListToEscape=listOf<Restaurant>()
+                val emptyListToEscape = listOf<Restaurant>()
                 emptyListToEscape.sqlEscaped
                 fail()
             }
@@ -207,8 +207,8 @@ class SQLEscapeTests
     fun testTrueBooleanEscape()
     {
         runOnQueryBuilder {
-            val resultCondition="where someFlag = ${true.sqlEscaped}"
-            val expectedCondition="where someFlag = 1"
+            val resultCondition = "where someFlag = ${true.sqlEscaped}"
+            val expectedCondition = "where someFlag = 1"
 
             assertEquals(expectedCondition, resultCondition)
         }
@@ -218,8 +218,8 @@ class SQLEscapeTests
     fun testFalseBooleanEscape()
     {
         runOnQueryBuilder {
-            val resultCondition="where someFlag = ${false.sqlEscaped}"
-            val expectedCondition="where someFlag = 0"
+            val resultCondition = "where someFlag = ${false.sqlEscaped}"
+            val expectedCondition = "where someFlag = 0"
 
             assertEquals(expectedCondition, resultCondition)
         }

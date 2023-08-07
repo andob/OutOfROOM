@@ -40,14 +40,14 @@ class QueryJoinClauses : LinkedList<String>()
 class JoinClauseBuilder
 {
     internal lateinit var remoteTable : Table
-    fun remoteTable(remoteTable : Table) = also { this.remoteTable=remoteTable }
+    fun remoteTable(remoteTable : Table) = also { this.remoteTable = remoteTable }
 
     internal lateinit var remoteColumn : Column
-    fun remoteColumn(remoteColumn : Column) = also { this.remoteColumn=remoteColumn }
+    fun remoteColumn(remoteColumn : Column) = also { this.remoteColumn = remoteColumn }
 
     internal lateinit var table : Table
-    fun table(table : Table) = also { this.table=table }
+    fun table(table : Table) = also { this.table = table }
 
     internal lateinit var column : Column
-    fun column(column : Column) = also { this.column=column }
+    fun column(column : Column) = also { this.column = column }
 }

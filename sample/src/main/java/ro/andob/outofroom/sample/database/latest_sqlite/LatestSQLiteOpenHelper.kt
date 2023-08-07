@@ -38,7 +38,7 @@ object LatestSQLiteOpenHelper : SQLiteOpenHelper
         //you can use a migration library such as Flyway
     }
 
-    //note to self: to close and delete thread safely, use it like this:
+    //note to self : to close and delete thread safely, use it like this:
     //fun closeAnd(more : () -> (Unit)) = synchronized(this) { super.close(); more() }
     //openHelper.closeAnd { databaseFile.delete() }
 }

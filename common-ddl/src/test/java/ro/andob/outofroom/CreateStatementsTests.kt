@@ -94,7 +94,7 @@ class CreateStatementsTests
     @Test
     fun testCreateTableWithForeignKeys()
     {
-        val countryTable=object : Table(name = "Country")
+        val countryTable = object : Table(name = "Country")
         {
             val id = Column(name = "id", type = SQLType.Text, notNull = true)
             val name = Column(name = "name", type = SQLType.Text)
@@ -144,7 +144,7 @@ class CreateStatementsTests
     @Test
     fun testCreateSchema()
     {
-        val schema=object : Schema()
+        val schema = object : Schema()
         {
             val countryTable = CountryTable()
             inner class CountryTable : Table(name = "Country")
@@ -176,7 +176,7 @@ class CreateStatementsTests
                 Index(table = cityTable, column = cityTable.countryId))
         }
 
-        val ddl=(schema.tables.map { it.toCreateTableSQL() }
+        val ddl = (schema.tables.map { it.toCreateTableSQL() }
             .plus(schema.indices.map { it.toCreateIndexSQL() }))
             .joinToString(separator = "\n")
 

@@ -3,7 +3,6 @@ package ro.andob.outofroom.sample.note.list
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.koin.android.ext.android.inject
 import ro.andob.outofroom.sample.R
 import ro.andob.outofroom.sample.database.SampleDatabase
 import ro.andob.outofroom.sample.databinding.ActivityNoteListBinding
@@ -21,7 +20,7 @@ class NoteListActivity : AppCompatActivity()
     @AutoViewBinding
     lateinit var binding : ActivityNoteListBinding
 
-    private val database : SampleDatabase by inject()
+    private val adapter = SimpleDeclarativeAdapter(::NoteCellView)
 
     override fun onCreate(savedInstanceState : Bundle?)
     {
@@ -29,9 +28,10 @@ class NoteListActivity : AppCompatActivity()
         setContentView(R.layout.activity_note_list)
         ReflectiveViewBindingFieldSetter.setup(this)
 
-        val adapter=SimpleDeclarativeAdapter { NoteCellView(it) }
-        binding.recycleView.layoutManager=LinearLayoutManager(this)
-        binding.recycleView.adapter=adapter
+        binding.recycleView.layoutManager = LinearLayoutManager(this)
+        binding.recycleView.adapter = adapter
+
+        val database = SampleDatabase.instance
 
         //for the sake of simplicity, we will query the database on the UI thread
         adapter.setItems(database.noteDao().getAll(NoteFilter()))
@@ -67,6 +67,6 @@ class NoteListActivity : AppCompatActivity()
         super.onResume()
 
         //for the sake of simplicity, this will be called when the user returns from NoteDetailsActivity to NoteListActivity
-        (binding.recycleView.adapter as? SimpleDeclarativeAdapter<*>)?.setItems(database.noteDao().getAll(NoteFilter()))
+        adapter.setItems(SampleDatabase.instance.noteDao().getAll(NoteFilter()))
     }
 }

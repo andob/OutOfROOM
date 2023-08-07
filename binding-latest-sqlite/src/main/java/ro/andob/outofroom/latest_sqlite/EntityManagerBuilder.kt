@@ -11,7 +11,7 @@ class EntityManagerBuilder
 )
 {
     private var queryArgumentConverter : QueryArgumentConverter = QueryArgumentConverter { a -> a }
-    fun queryArgumentConverter(value : QueryArgumentConverter) = also { queryArgumentConverter=value }
+    fun queryArgumentConverter(value : QueryArgumentConverter) = also { queryArgumentConverter = value }
 
     fun build() = EntityManager(
         database = LatestSQLiteDBWrapper { sqLiteOpenHelper.writableDatabase },

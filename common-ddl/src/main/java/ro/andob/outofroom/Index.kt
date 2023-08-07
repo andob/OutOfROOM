@@ -12,9 +12,9 @@ class Index
 
     fun toCreateIndexSQL() : String
     {
-        val indexName="index_${table}_${columns.joinToString(separator = "_")}"
-        val columnsString=columns.joinToString(separator = ",") { "`$it`" }
-        val uniqueString=if(unique) "unique" else ""
+        val indexName = "index_${table}_${columns.joinToString(separator = "_")}"
+        val columnsString = columns.joinToString(separator = ",") { "`$it`" }
+        val uniqueString = if(unique) "unique" else ""
         return "create $uniqueString index if not exists `$indexName` on `$table`($columnsString)"
     }
 

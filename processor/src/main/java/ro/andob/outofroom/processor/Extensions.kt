@@ -18,10 +18,10 @@ fun Elements.getElementFromClass(typeUtils : Types, lambda : () -> Class<*>) : E
     }
     catch (ex : MirroredTypeException)
     {
-        val element=typeUtils.asElement(ex.typeMirror!!)!!
-        if (element.toString().startsWith("java.")||
-            element.toString().startsWith("javax.")||
-            element.toString().startsWith("android.")||
+        val element = typeUtils.asElement(ex.typeMirror!!)!!
+        if (element.toString().startsWith("java.") || 
+            element.toString().startsWith("javax.") || 
+            element.toString().startsWith("android.") || 
             element.toString().startsWith("androidx."))
             return null
         return element

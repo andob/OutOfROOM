@@ -2,11 +2,6 @@ package ro.andob.outofroom.sample
 
 import android.app.Activity
 import android.os.Bundle
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
-import org.koin.dsl.module
 import ro.andob.outofroom.sample.database.SampleDatabase
 import ro.andob.outofroom.sample.database.latest_sqlite.LatestSQLiteSampleDatabase
 import ro.andob.outofroom.sample.database.system_sqlite.SystemSQLiteSampleDatabase
@@ -21,16 +16,7 @@ class SplashScreenActivity : Activity()
         super.onCreate(savedInstanceState)
 
         showChooseDatabaseAPIDialogThen { database ->
-
-            stopKoin()
-            startKoin{
-                androidLogger()
-                androidContext(App.context)
-                modules(listOf(module {
-                    single { database }
-                }))
-            }
-
+            SampleDatabase.instance = database
             ActivityRouter.startNoteListActivity(from = this)
             finish()
         }

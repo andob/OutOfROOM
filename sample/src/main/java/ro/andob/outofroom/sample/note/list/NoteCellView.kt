@@ -16,15 +16,15 @@ class NoteCellView : CellView<Note>
     lateinit var binding : CellNoteBinding
     override fun layout() = R.layout.cell_note
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context : Context?) : super(context)
+    constructor(context : Context?, attrs : AttributeSet?) : super(context, attrs)
+    constructor(context : Context?, attrs : AttributeSet?, defStyleAttr : Int) : super(context, attrs, defStyleAttr)
 
     @ModelBinder
     fun setNote(note : Note)
     {
-        binding.titleLabel.text=note.title
-        binding.messageLabel.text=note.message
+        binding.titleLabel.text = note.title
+        binding.messageLabel.text = note.message
 
         binding.cellContentContainer.setOnClickListener {
             ActivityRouter.startNoteDetailsActivity(from = it.context, noteId = note.id)

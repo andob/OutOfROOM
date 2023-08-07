@@ -13,15 +13,15 @@ class EntityManager
         adapter : (QueryResult) -> (MODEL),
     ) : List<MODEL>
     {
-        val items=mutableListOf<MODEL>()
+        val items = mutableListOf<MODEL>()
 
-        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
+        val argumentsStringArray = ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
 
         database.rawQuery(sql, argumentsStringArray).use { cursor ->
-            val queryResult=QueryResult(cursor)
+            val queryResult = QueryResult(cursor)
             while (cursor.moveToNext())
             {
-                val item=adapter(queryResult)
+                val item = adapter(queryResult)
                 items.add(item)
             }
         }
@@ -35,7 +35,7 @@ class EntityManager
         arguments : Array<Any?> = arrayOf(),
     )
     {
-        val argumentsStringArray=ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
+        val argumentsStringArray = ArrayUtils.convertObjectArrayToStringArray(queryArgumentConverter, arguments)
 
         database.execSQL(sql, argumentsStringArray)
     }
@@ -48,8 +48,8 @@ class EntityManager
         adapter : (InsertData) -> (Unit),
     )
     {
-        val columnNames=columns.joinToString(separator = ",", transform = { column -> "`${column.name}`" })
-        val questionMarks=columns.joinToString(separator = ",", transform = { "?" })
+        val columnNames = columns.joinToString(separator = ",", transform = { column -> "`${column.name}`" })
+        val questionMarks = columns.joinToString(separator = ",", transform = { "?" })
 
         database.compileStatement("insert or $or into $table($columnNames) values ($questionMarks)").use { statement ->
             adapter(InsertDataImpl(statement, columns))
