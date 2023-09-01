@@ -2,12 +2,16 @@ package ro.andob.outofroom
 
 import java.io.Closeable
 import java.sql.ResultSet
+import java.util.LinkedList
+import java.util.Queue
 
 class JDBCResultSetWrapper
 (
     private val resultSet : ResultSet
 ) : ICursor, Closeable
 {
+    private val onClosedCallbacksQueue : Queue<() -> Unit> = LinkedList()
+
     override fun getColumnIndexOrThrow(name : String) : Int = resultSet.findColumn(name)-1
 
     override fun getString(index : Int) : String? = resultSet.getString(index+1)
@@ -20,5 +24,15 @@ class JDBCResultSetWrapper
     override fun moveToFirst() : Boolean = resultSet.first()
     override fun moveToNext() : Boolean = resultSet.next()
 
-    override fun close() = resultSet.close()
+    fun onClosed(callback : () -> Unit)
+    {
+        onClosedCallbacksQueue.add(callback)
+    }
+
+    override fun close()
+    {
+        resultSet.close()
+        while (onClosedCallbacksQueue.isNotEmpty())
+            onClosedCallbacksQueue.remove().invoke()
+    }
 }

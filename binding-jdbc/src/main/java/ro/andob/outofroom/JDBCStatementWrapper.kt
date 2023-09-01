@@ -3,12 +3,16 @@ package ro.andob.outofroom
 import java.io.Closeable
 import java.sql.PreparedStatement
 import java.sql.Types
+import java.util.LinkedList
+import java.util.Queue
 
 class JDBCStatementWrapper
 (
     private val statement : PreparedStatement
 ) : IStatement, Closeable
 {
+    private val onClosedCallbacksQueue : Queue<() -> Unit> = LinkedList()
+
     override fun bindString(index : Int, value : String) = statement.setString(index, value)
     override fun bindLong(index : Int, value : Long) = statement.setLong(index, value)
     override fun bindDouble(index : Int, value : Double) = statement.setDouble(index, value)
@@ -22,5 +26,15 @@ class JDBCStatementWrapper
 
     internal fun execute() { statement.execute() }
 
-    override fun close() = statement.close()
+    fun onClosed(callback : () -> Unit)
+    {
+        onClosedCallbacksQueue.add(callback)
+    }
+
+    override fun close()
+    {
+        statement.close()
+        while (onClosedCallbacksQueue.isNotEmpty())
+            onClosedCallbacksQueue.remove().invoke()
+    }
 }

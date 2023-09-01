@@ -6,7 +6,7 @@ class EntityManager
     val queryArgumentConverter : QueryArgumentConverter,
 )
 {
-    inline fun <MODEL> query
+    fun <MODEL> query
     (
         sql : String,
         arguments : Array<Any?> = arrayOf(),
@@ -40,7 +40,7 @@ class EntityManager
         database.execSQL(sql, argumentsStringArray)
     }
 
-    inline fun insert
+    fun insert
     (
         or : InsertOr,
         table : Table,

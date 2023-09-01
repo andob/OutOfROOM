@@ -10,19 +10,28 @@ class JDBCConnectionWrapper
 {
     override fun rawQuery(sql : String, args : Array<String>) : ICursor
     {
-        return JDBCStatementWrapper(connectionProvider().prepareStatement(sql).withArgs(args)).executeQuery()
+        val connection = connectionProvider()
+        val statement = JDBCStatementWrapper(connection.prepareStatement(sql).withArgs(args))
+        statement.onClosed { connection.close() }
+        val cursor = statement.executeQuery()
+        (cursor as JDBCResultSetWrapper).onClosed { statement.close() }
+        return cursor
     }
 
     override fun execSQL(sql : String, args : Array<String>)
     {
-        JDBCStatementWrapper(connectionProvider().prepareStatement(sql).withArgs(args)).use { statement ->
-            statement.execute()
-        }
+        val connection = connectionProvider()
+        val statement = JDBCStatementWrapper(connection.prepareStatement(sql).withArgs(args))
+        statement.onClosed { connection.close() }
+        statement.use { statement.execute() }
     }
 
     override fun compileStatement(sql : String) : IStatement
     {
-        return JDBCStatementWrapper(connectionProvider().prepareStatement(sql))
+        val connection = connectionProvider()
+        val statement = JDBCStatementWrapper(connection.prepareStatement(sql))
+        statement.onClosed { connection.close() }
+        return statement
     }
 
     private fun PreparedStatement.withArgs(args : Array<String>) : PreparedStatement = also { statement ->
