@@ -2,6 +2,7 @@ package ro.andob.outofroom
 
 import java.io.Closeable
 import java.sql.ResultSet
+import java.sql.SQLException
 import java.util.LinkedList
 import java.util.Queue
 
@@ -12,7 +13,9 @@ class JDBCResultSetWrapper
 {
     private val onClosedCallbacksQueue : Queue<() -> Unit> = LinkedList()
 
-    override fun getColumnIndexOrThrow(name : String) : Int = resultSet.findColumn(name)-1
+    override fun getColumnIndex(name : String) : Int? =
+        try { resultSet.findColumn(name)-1 }
+        catch (ignored : SQLException) { null }
 
     override fun getString(index : Int) : String? = resultSet.getString(index+1)
     override fun getInt(index : Int) : Int = resultSet.getInt(index+1)

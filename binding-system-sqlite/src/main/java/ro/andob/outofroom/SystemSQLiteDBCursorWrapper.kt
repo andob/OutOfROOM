@@ -8,7 +8,9 @@ class SystemSQLiteDBCursorWrapper
     private val delegate : Cursor
 ) : ICursor, Closeable
 {
-    override fun getColumnIndexOrThrow(name : String) : Int = delegate.getColumnIndexOrThrow(name)
+    override fun getColumnIndex(name : String) : Int? =
+        try { delegate.getColumnIndexOrThrow(name) }
+        catch (ignored : IllegalArgumentException) { null }
 
     private inline fun <T> nullOr(index : Int, some : () -> T?) : T? = if (delegate.isNull(index)) null else some()
 

@@ -2,7 +2,7 @@ package ro.andob.outofroom
 
 interface ICursor
 {
-    fun getColumnIndexOrThrow(name : String) : Int
+    fun getColumnIndex(name : String) : Int?
 
     fun getString(index : Int) : String?
     fun getInt(index : Int) : Int?

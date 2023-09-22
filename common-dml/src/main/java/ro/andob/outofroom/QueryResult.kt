@@ -6,25 +6,25 @@ class QueryResult
 )
 {
     fun getString(column : Column) : String? =
-        cursor.getString(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getString)
 
     fun getInt(column : Column) : Int? =
-        cursor.getInt(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getInt)
 
     fun getLong(column : Column) : Long? =
-        cursor.getLong(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getLong)
 
     fun getFloat(column : Column) : Float? =
-        cursor.getFloat(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getFloat)
 
     fun getDouble(column : Column) : Double? =
-        cursor.getDouble(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getDouble)
 
     fun getBoolean(column : Column) : Boolean =
-        cursor.getInt(cursor.getColumnIndexOrThrow(column.name))==true.toInt()
+        cursor.getColumnIndex(column.name)?.let(cursor::getInt)==true.toInt()
 
     fun getBytes(column : Column) : ByteArray? =
-        cursor.getBytes(cursor.getColumnIndexOrThrow(column.name))
+        cursor.getColumnIndex(column.name)?.let(cursor::getBytes)
 
     fun toInt() = cursor.getInt(0)?:0
     fun toLong() = cursor.getLong(0)?:0L
