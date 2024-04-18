@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -18,8 +18,4 @@ allprojects {
         maven { url 'https://maven.jahia.org/maven2/' }
         maven { url 'https://maven.andob.info/repository/open_source/' }
     }
-}
-
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
 }

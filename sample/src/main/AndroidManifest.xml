@@ -12,7 +12,6 @@
         <activity
             android:name=".SplashScreenActivity"
             android:windowSoftInputMode="stateHidden"
-            android:configChanges="${configChanges}"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,13 +21,11 @@
 
         <activity
             android:name=".note.list.NoteListActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:configChanges="${configChanges}"/>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".note.details.NoteDetailsActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:configChanges="${configChanges}"/>
+            android:windowSoftInputMode="stateHidden"/>
 
     </application>
 
