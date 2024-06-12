@@ -4,10 +4,10 @@ apply plugin: 'maven-publish'
 
 android {
     namespace 'ro.andob.outofroom'
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         minSdk 21
-        targetSdk 33
+        targetSdk 34
     }
     buildTypes {
         release {
@@ -34,7 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'com.github.requery:sqlite-android:3.42.0'
-    implementation 'androidx.sqlite:sqlite-ktx:2.3.1'
+    implementation 'androidx.sqlite:sqlite-ktx:2.4.0'
 
     implementation project(":common-ddl")
     implementation project(":common-dml")

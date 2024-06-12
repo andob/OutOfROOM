@@ -53,7 +53,7 @@ class NoteListActivity : AppCompatActivity()
         ShowDialog.withInput(context = this,
             title = getString(R.string.add_note),
             hint = getString(R.string.message),
-            okButtonClickedListener = { noteText ->
+            okAction = { noteText ->
                 onNoteInputted(Note(
                     id = StringId.newRandomUUID(),
                     title = StringId.newRandomUUID<Any>().toString(),

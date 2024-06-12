@@ -1,6 +1,5 @@
 package ro.andob.outofroom.sample
 
-import android.app.Activity
 import android.os.Bundle
 import ro.andob.outofroom.sample.database.SampleDatabase
 import ro.andob.outofroom.sample.database.latest_sqlite.LatestSQLiteSampleDatabase
@@ -8,8 +7,11 @@ import ro.andob.outofroom.sample.database.system_sqlite.SystemSQLiteSampleDataba
 import ro.andob.outofroom.sample.router.ActivityRouter
 import ro.andob.outofroom.sample.router.DialogListItem
 import ro.andob.outofroom.sample.router.ShowDialog
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
 
-class SplashScreenActivity : Activity()
+@SuppressLint("CustomSplashScreen")
+class SplashScreenActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState : Bundle?)
     {

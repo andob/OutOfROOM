@@ -58,7 +58,7 @@ class NoteDetailsActivity : AppCompatActivity()
             title = getString(R.string.edit_note),
             hint = getString(R.string.message),
             contents = note.message,
-            okButtonClickedListener = { noteText ->
+            okAction = { noteText ->
                 onNoteInputted(Note(
                     id = note.id,
                     title = StringId.newRandomUUID<Any>().toString(),
