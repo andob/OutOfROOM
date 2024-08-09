@@ -4,7 +4,7 @@ OutOfRoom is a Database Abstraction Layer developed and used to replace the code
 
 ### Why?
 
-I have stopped using ORMs. In particular, I have stopped using the ROOM ORM. ORMs speed up initial development, but on large long-term projects, ORMs become a bottleneck, too many hacks need to be done if you want to use very specific SQL features. ORMs are alluring because they take away the ordeal of writing adapting code between the relational paradigm and object oriented paradigm. While not using an ORM will yield to some minimal boilerplate code, the flexibility advantages are enormous. You can find numerous very well argumented articles online around this opinion.
+I have stopped using ORMs. In particular, I have stopped using the ROOM ORM. ORMs speed up initial development, but on large long-term projects, ORMs become a bottleneck. Too many hacks need to be done if you want to use very specific SQL features. Nevertheless, ORMs are alluring because they take away the ordeal of writing adapting code between the relational paradigm and object oriented paradigm. While not using an ORM will indeed yield to some boilerplate code, the flexibility advantages are enormous. You can find numerous very well argumented articles online around this opinion.
 
 Library goals:
 
@@ -253,7 +253,8 @@ class NoteDao
         entityManager.insert(or = or,
             table = schema.noteTable,
             columns = schema.noteTable.columns,
-            adapter = { insertData -> populateInsertData(insertData, note) })
+            adapter = { insertData -> populateInsertData(insertData, note) },
+        )
     }
 
     fun update(note : Note) =
@@ -270,7 +271,8 @@ Usage:
 val note = Note(
     id = UUID.randomUUID().toString(),
     title = "test", contents = "test",
-    color = NoteColor.White)
+    color = NoteColor.White,
+)
 
 NotesDatabase.noteDao().insert(note)
 NotesDatabase.noteDao().update(note)
@@ -292,7 +294,8 @@ class NoteDao
         entityManager.exec(
             sql = """delete from ${schema.noteTable}
                      where ${schema.noteTable.id} = ?""",
-            arguments = arrayOf(note.id))
+            arguments = arrayOf(note.id),
+        )
     }
     
     fun deleteAll()
@@ -329,7 +332,8 @@ class NoteDao
     {
         return entityManager.query(
             sql = "select * from ${schema.noteTable}",
-            adapter = ::parseQueryResult)
+            adapter = ::parseQueryResult,
+        )
     }
 
     fun getById(noteId : String) : Note?
@@ -339,7 +343,7 @@ class NoteDao
                      where ${schema.noteTable.id} = ?
                      limit 1""",
             arguments = arrayOf(noteId),
-            adapter = ::parseQueryResult
+            adapter = ::parseQueryResult,
         ).firstOrNull()
     }
 
@@ -349,14 +353,15 @@ class NoteDao
             sql = """select * from ${schema.noteTable}
                      where ${schema.noteTable.id} in (${questionMarks(noteIds)})""",
             arguments = noteIds.toTypedArray(),
-            adapter = ::parseQueryResult)
+            adapter = ::parseQueryResult,
+        )
     }
     
     fun count() : Int
     {
         return entityManager.query(
             sql = "select count(*) from ${schema.noteTable}",
-            adapter = { queryResult -> queryResult.toInt() }
+            adapter = { queryResult -> queryResult.toInt() },
         ).firstOrNull()?:0
     }
 
