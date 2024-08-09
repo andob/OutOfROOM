@@ -1,10 +1,10 @@
 ## OutOfRoom
 
-OutOfRoom is a Database Abstraction Layer developed and used to replace the code written with ROOM ORM from my projects. This library is not an ORM and does not pretend to become one. It's just a simple tool to keep ORM-less persistence code clean and organized.
+OutOfRoom is a Database Abstraction Layer developed and used to replace the code written with ROOM ORM from my projects. This library is not an ORM and does not pretend to become one. It's just a simple database abstraction layer to keep ORM-less persistence code clean and organized.
 
 ### Why?
 
-I have stopped using ORMs. Speeds up initial development, but on large project, ORMs become a bottleneck, too many hacks need to be done if you use very specific SQL features. ORMs also prevents the developer from the ordeal of having to write adapting code between the relational paradigm and object oriented paradigm. Not using an ORM will yield to (some) minimal boilerplate code, yet flexibility advantages are enormous. You can find numerous articles and opinions about this online.
+I have stopped using ORMs. In particular, I have stopped using the ROOM ORM. ORMs speed up initial development, but on large long-term projects, ORMs become a bottleneck, too many hacks need to be done if you want to use very specific SQL features. ORMs are alluring because they take away the ordeal of writing adapting code between the relational paradigm and object oriented paradigm. While not using an ORM will yield to some minimal boilerplate code, the flexibility advantages are enormous. You can find numerous very well argumented articles online around this opinion.
 
 Library goals:
 
@@ -408,15 +408,15 @@ import io.requery.android.database.sqlite.SQLiteOpenHelper
 object NotesDatabase { ... }
 ```
 
-By using the requery SQLite compatibility library, a version of the SQLite library will be bundled with your app. This will yield in larger APK size. Advantages of using latest SQLite: speed, security fixes, all your app users will use the exact same SQLite version across a wide range of devices.
+By using the requery SQLite compatibility library, a version of the SQLite library will be bundled with your app. This will yield in larger APK size. Advantages of using latest SQLite: latest features, latest security fixes, speed, plus app users will use the exact same SQLite version regardless of device.
 
 ### Migrating from ROOM
 
-This library does not provide an automatic tool to migrate from ROOM. The recommended way to migrate is:
+This library does not provide an automatic tool to migrate from ROOM. How I did the migration:
 
-- Write unit tests on the entire persistence layer (on ALL methods from all DAOs)
-- Replace ROOM with OutOfRoom, rewrite code keeping DAO API (method signatures) intact
-- Run persistence unit tests again, fix the errors
+- Wrote unit tests on the entire persistence layer (on ALL methods from all DAOs)
+- Replaced ROOM with OutOfRoom, rewrote code keeping DAO API (method signatures) intact
+- Ran persistence unit tests again, fixed the errors
 
 ### License
 
