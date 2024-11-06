@@ -10,6 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:background="#000000"
         app:titleTextColor="#ffffff"
         app:title="@string/note"
@@ -43,6 +44,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:id="@+id/actionButtonsContainer">
