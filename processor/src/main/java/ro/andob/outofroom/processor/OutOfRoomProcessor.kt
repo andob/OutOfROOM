@@ -39,7 +39,7 @@ class OutOfRoomProcessor : AbstractProcessor()
 
             for (annotatedElement in roundEnvironment.getElementsAnnotatedWith(QueryArgumentConverter.Generator::class.java))
             {
-                if (annotatedElement.kind!=ElementKind.CLASS)
+                if (annotatedElement.kind != ElementKind.CLASS)
                     throw ProcessingException("Only classes can be annotated with ${QueryArgumentConverter.Generator::class.java}", annotatedElement);
 
                 val insertDataExtensionMethodsParentElement = elementUtils.getElementFromKClass(typeUtils, annotatedElement.getAnnotation(QueryArgumentConverter.Generator::class.java)::insertDataExtensionMethodsParentClass)?:annotatedElement
@@ -48,12 +48,12 @@ class OutOfRoomProcessor : AbstractProcessor()
 
                 for (enclosedElement in insertDataExtensionMethodsParentElement.enclosedElements)
                 {
-                    if (enclosedElement.kind==ElementKind.METHOD)
+                    if (enclosedElement.kind == ElementKind.METHOD)
                     {
-                        val isAbstract = enclosedElement.modifiers.any { modifier -> modifier==Modifier.ABSTRACT }
-                        val isPublic = enclosedElement.modifiers.any { modifier -> modifier==Modifier.PUBLIC }
+                        val isAbstract = enclosedElement.modifiers.any { modifier -> modifier == Modifier.ABSTRACT }
+                        val isPublic = enclosedElement.modifiers.any { modifier -> modifier == Modifier.PUBLIC }
                         val parameters = (enclosedElement as ExecutableElement).parameters
-                        if (!isAbstract && isPublic && parameters.size==3)
+                        if (!isAbstract && isPublic && parameters.size == 3)
                         {
                             if (parameters[0].asType().toString()==InsertData::class.java.name
                                 && parameters[1].asType().toString()==Column::class.java.name

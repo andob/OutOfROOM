@@ -40,7 +40,7 @@ object ShowDialog
         val dialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setAdapter(adapter) { _, index ->
-                if (index>=0 && index<items.size)
+                if (index >= 0 && index < items.size)
                     items[index].onClick?.invoke()
             }
             .show()

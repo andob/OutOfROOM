@@ -10,7 +10,7 @@ abstract class Table
     private fun findColumnsReflectively() : List<Column>
     {
         return this::class.java.declaredFields
-            .filter { field -> field.type==Column::class.java }
+            .filter { field -> field.type == Column::class.java }
             .map { field -> field.also { it.isAccessible = true } }
             .map { field -> field.get(this) as Column }
     }
@@ -35,14 +35,14 @@ abstract class Table
                 tokens.add("not null")
 
             (primaryKey as? PrimaryKey.AutoIncrement)?.let { autoIncrementPrimaryKey ->
-                if (autoIncrementPrimaryKey.column==column)
+                if (autoIncrementPrimaryKey.column == column)
                     tokens.add("primary key autoincrement")
             }
 
             return@map tokens.joinToString(separator = " ")
         })
 
-        if (primaryKey!=null && primaryKey !is PrimaryKey.AutoIncrement)
+        if (primaryKey != null && primaryKey !is PrimaryKey.AutoIncrement)
             definitions.add(primaryKey.toString())
 
         for (foreignKey in foreignKeys)

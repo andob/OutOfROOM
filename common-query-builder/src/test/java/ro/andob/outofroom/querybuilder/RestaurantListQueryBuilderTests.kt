@@ -16,7 +16,7 @@ class RestaurantListQueryBuilderTests
 
         val queryBuilder = RestaurantListQueryBuilder(filter)
         val resultQuery = queryBuilder.build().first.removeUnnecessarySpaces()
-        val expectedQuery = "select * from ${FS.Restaurant} where 1==1"
+        val expectedQuery = "select * from ${FS.Restaurant} where 1=1"
 
         assertEquals(expectedQuery, resultQuery)
     }

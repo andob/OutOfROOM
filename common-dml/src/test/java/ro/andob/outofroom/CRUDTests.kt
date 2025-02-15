@@ -40,8 +40,8 @@ class CRUDTests
         val note2 = randomizer.nextNote()
         TestDatabase.noteDao.insert(note2)
         assertEquals(2, TestDatabase.noteDao.getAll().size)
-        assertEquals(note1, TestDatabase.noteDao.getAll().find { it.id==note1.id }!!)
-        assertEquals(note2, TestDatabase.noteDao.getAll().find { it.id==note2.id }!!)
+        assertEquals(note1, TestDatabase.noteDao.getAll().find { it.id == note1.id }!!)
+        assertEquals(note2, TestDatabase.noteDao.getAll().find { it.id == note2.id }!!)
     }
 
     @Test

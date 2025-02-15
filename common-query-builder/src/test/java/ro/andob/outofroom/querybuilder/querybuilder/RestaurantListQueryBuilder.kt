@@ -17,16 +17,16 @@ class RestaurantListQueryBuilder : QueryBuilder<RestaurantFilter>
     {
         val args = mutableListOf<Any?>()
 
-        if (filter.search!=null)
+        if (filter.search != null)
             conditions.addSearchConditions(filter.search, columns = arrayOf(FS.Restaurant_name.asColumn()))
 
-        if (filter.rating!=null)
+        if (filter.rating != null)
         {
             conditions.add("${FS.Restaurant_rating} = ?")
             args.add(filter.rating)
         }
 
-        if (filter.boundingBox!=null)
+        if (filter.boundingBox != null)
         {
             conditions.add("${FS.Restaurant_latitude}  <= ?")
             args.add(filter.boundingBox?.northWestLat)

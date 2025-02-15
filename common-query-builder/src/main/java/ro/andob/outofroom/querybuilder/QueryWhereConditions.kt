@@ -12,7 +12,7 @@ class QueryWhereConditions : LinkedList<String>()
 
     fun addSearchConditions(searchTerms : Set<String>, columns : Array<Column>)
     {
-        if (searchTerms.size==1 && columns.size==1)
+        if (searchTerms.size == 1 && columns.size == 1)
         {
             val likeArgument = "'%${SQLEscape.escapeAndUnquoteString(searchTerms.first())}%'"
             add(" ${columns[0]} like $likeArgument ")
@@ -34,10 +34,10 @@ class QueryWhereConditions : LinkedList<String>()
     fun mergeWithAnd() =
         if (!isEmpty())
             this.joinToString(separator = " and ")
-        else " 1==1 "
+        else " 1=1 "
 
     fun mergeWithOr() =
         if (!isEmpty())
             this.joinToString(separator = " or ")
-        else " 1==1 "
+        else " 1=1 "
 }

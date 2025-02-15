@@ -15,7 +15,7 @@ class NoteListQueryBuilder
 
     override fun where(conditions : QueryWhereConditions) : Pair<String, Array<Any?>>
     {
-        if (filter.search!=null)
+        if (filter.search != null)
         {
             conditions.addSearchConditions(
                 filter.search, columns = arrayOf(

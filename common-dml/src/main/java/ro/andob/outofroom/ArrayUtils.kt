@@ -5,7 +5,7 @@ object ArrayUtils
     @JvmStatic
     fun convertObjectArrayToStringArray(argumentConverter : QueryArgumentConverter, objects : Array<Any?>?) : Array<String>
     {
-        if (objects==null)
+        if (objects == null)
             return arrayOf()
 
         val strings = Array(size = objects.size, init = { "" })
@@ -21,14 +21,14 @@ object ArrayUtils
     @JvmStatic
     fun createQuestionMarks(times : Int) : String
     {
-        if (times<=1)
+        if (times <= 1)
             return "?"
 
         val builder = StringBuilder()
         for (i in 0 until times)
         {
             builder.append('?')
-            if (i!=times-1)
+            if (i != times-1)
                 builder.append(',')
         }
 

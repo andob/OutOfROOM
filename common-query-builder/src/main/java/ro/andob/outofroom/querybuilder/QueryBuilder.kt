@@ -31,9 +31,9 @@ abstract class QueryBuilder<FILTER>
 
         if (isPaginationEnabled())
         {
-            if (page.limit!=null)
+            if (page.limit != null)
                 sql.append(" limit ${page.limit} ")
-            if (page.offset!=null)
+            if (page.offset != null)
                 sql.append(" offset ${page.offset} ")
         }
 
