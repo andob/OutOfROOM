@@ -27,9 +27,9 @@ To use with system's SQLite:
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.3.5'
-    implementation 'ro.andob.outofroom:common-dml:1.3.5'
-    implementation 'ro.andob.outofroom:binding-system-sqlite:1.3.5'
+    implementation 'ro.andob.outofroom:common-ddl:1.3.6'
+    implementation 'ro.andob.outofroom:common-dml:1.3.6'
+    implementation 'ro.andob.outofroom:binding-system-sqlite:1.3.6'
 }
 ```
 
@@ -37,9 +37,9 @@ To use with [the latest SQLite version provided by requery](https://github.com/r
 
 ```groovy
 dependencies {
-    implementation 'ro.andob.outofroom:common-ddl:1.3.5'
-    implementation 'ro.andob.outofroom:common-dml:1.3.5'
-    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.3.5'
+    implementation 'ro.andob.outofroom:common-ddl:1.3.6'
+    implementation 'ro.andob.outofroom:common-dml:1.3.6'
+    implementation 'ro.andob.outofroom:binding-latest-sqlite:1.3.6'
     implementation 'com.github.requery:sqlite-android:3.42.0'
     implementation 'androidx.sqlite:sqlite-ktx:2.3.1'
 }

@@ -32,6 +32,8 @@ import ro.andob.outofroom.SQLType;
 
 public class QueryArgumentConverterImpl implements QueryArgumentConverter
 {
+    private static final QueryArgumentConverterImpl instance = new QueryArgumentConverterImpl();
+    
     private final Map<Class<?>, InsertDataExtensionFunction<Object>> extensionFunctions = new HashMap<>();
 
     @SuppressWarnings("unchecked")
@@ -40,13 +42,18 @@ public class QueryArgumentConverterImpl implements QueryArgumentConverter
         extensionFunctions.put(type, (InsertDataExtensionFunction<Object>)extensionFunction);
     }
 
-    public QueryArgumentConverterImpl()
+    private QueryArgumentConverterImpl()
     {
 ${insertDataExtensionMethods.map { extensionMethod -> 
     extensionMethod.parameters[2].asType().toString().split("<").first().trim().let { targetType -> 
         "addExtensionFunction($targetType.class, ${insertDataExtensionMethodsParentClass}::${extensionMethod.simpleName});"
     }
 }.joinToString(separator = "\n", transform = { "        ${it.trim()}" })}
+    }
+    
+    public static QueryArgumentConverterImpl generate()
+    {
+        return instance;
     }
 
     @Override
