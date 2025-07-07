@@ -7,10 +7,10 @@ class LatestSQLiteDBWrapper
     private val databaseProvider : () -> SQLiteDatabase
 ) : IDatabase
 {
-    override fun rawQuery(sql : String, args : Array<String>) : ICursor =
+    override fun rawQuery(sql : String, args : Array<String?>) : ICursor =
         LatestSQLiteDBCursorWrapper(databaseProvider().rawQuery(sql, args))
 
-    override fun execSQL(sql : String, args : Array<String>) =
+    override fun execSQL(sql : String, args : Array<String?>) =
         databaseProvider().execSQL(sql, args)
 
     override fun compileStatement(sql : String) : IStatement =

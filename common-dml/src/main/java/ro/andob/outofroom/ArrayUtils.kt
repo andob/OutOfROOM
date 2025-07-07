@@ -3,12 +3,12 @@ package ro.andob.outofroom
 object ArrayUtils
 {
     @JvmStatic
-    fun convertObjectArrayToStringArray(argumentConverter : QueryArgumentConverter, objects : Array<Any?>?) : Array<String>
+    fun convertObjectArrayToStringArray(argumentConverter : QueryArgumentConverter, objects : Array<Any?>?) : Array<String?>
     {
         if (objects == null)
             return arrayOf()
 
-        val strings = Array(size = objects.size, init = { "" })
+        val strings = Array<String?>(size = objects.size, init = { null })
         for (i in objects.indices)
         {
             objects[i]?.let(argumentConverter::convert)

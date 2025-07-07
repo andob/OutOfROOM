@@ -8,7 +8,7 @@ class JDBCConnectionWrapper
     private val connectionProvider : () -> (Connection)
 ) : IDatabase
 {
-    override fun rawQuery(sql : String, args : Array<String>) : ICursor
+    override fun rawQuery(sql : String, args : Array<String?>) : ICursor
     {
         val connection = connectionProvider()
         val statement = JDBCStatementWrapper(connection.prepareStatement(sql).withArgs(args))
@@ -18,7 +18,7 @@ class JDBCConnectionWrapper
         return cursor
     }
 
-    override fun execSQL(sql : String, args : Array<String>)
+    override fun execSQL(sql : String, args : Array<String?>)
     {
         val connection = connectionProvider()
         val statement = JDBCStatementWrapper(connection.prepareStatement(sql).withArgs(args))
@@ -34,8 +34,7 @@ class JDBCConnectionWrapper
         return statement
     }
 
-    private fun PreparedStatement.withArgs(args : Array<String>) : PreparedStatement = also { statement ->
-        for ((index, arg) in args.withIndex())
-            statement.setString(index+1, arg)
+    private fun PreparedStatement.withArgs(args : Array<String?>) : PreparedStatement = also { statement ->
+        args.forEachIndexed { index, arg -> statement.setString(index+1, arg) }
     }
 }
