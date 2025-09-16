@@ -120,11 +120,13 @@ class NotesDatabaseOpenHelper
 {
     override fun onCreate(db : SQLiteDatabase)
     {
-        for (table in schema.tables)
+        schema.tables.forEach { table ->
             db.execSQL(table.toCreateTableSQL())
+        }
 
-        for (index in schema.indices)
+        schema.indices.forEach { index ->
             db.execSQL(index.toCreateIndexSQL())
+        }
     }
 
     override fun onConfigure(db : SQLiteDatabase)
